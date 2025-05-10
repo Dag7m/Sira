@@ -26,24 +26,37 @@ export const Register = () => {
 
 
   }
+const [role, setRole] = useState("");
 
+// ...
 
-  const registerHandler = (e) => {
-    e.preventDefault()
-    const data = {
-      name,
-      email,
-      password,
-    }
+// Update the role input field
+<div className='bg-white flex justify-center items-center'>
+  <div className='text-gray-600 px-2'>
+    <BsFileEarmarkText size={20} />
+  </div>
+  <input value={role} onChange={(e) => setRole(e.target.value)} required placeholder='Role' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
+</div>
 
-    dispatch(registerUser(data))
-
-    setName("")
-    setEmail("")
-    setPassword("")
-
-
+// Update the registerHandler function to include role
+const registerHandler = (e) => {
+  e.preventDefault()
+  const data = {
+    name,
+    email,
+    password,
+    role,
   }
+
+  dispatch(registerUser(data))
+
+  setName("")
+  setEmail("")
+  setPassword("")
+  setRole("")
+}
+
+
 
 
 
@@ -124,4 +137,3 @@ export const Register = () => {
     </>
   )
 
-}
