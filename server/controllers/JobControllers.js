@@ -1,4 +1,4 @@
-const pool = require('../database');
+const pool = require('../config/database');
 const cloudinary = require('cloudinary');
 
 exports.createJob = async (req, res) => {

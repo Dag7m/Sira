@@ -25,18 +25,12 @@ export const Register = () => {
 
 
 
-  }
+  
 const [role, setRole] = useState("");
 
-// ...
 
-// Update the role input field
-<div className='bg-white flex justify-center items-center'>
-  <div className='text-gray-600 px-2'>
-    <BsFileEarmarkText size={20} />
-  </div>
-  <input value={role} onChange={(e) => setRole(e.target.value)} required placeholder='Role' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
-</div>
+
+
 
 // Update the registerHandler function to include role
 const registerHandler = (e) => {
@@ -107,14 +101,12 @@ const registerHandler = (e) => {
                   }
                 </div>
               </div>
-              {/* role */}
               <div className='bg-white flex justify-center items-center'>
-                <div className='text-gray-600 px-2'>
-                  <MdPermIdentity size={20} />
-                </div>
-                <input value={name} onChange={(e) => setName(e.target.value)} required placeholder='role' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
-              </div>
-
+  <div className='text-gray-600 px-2'>
+    <BsFileEarmarkText size={20} />
+  </div>
+  <input value={role} onChange={(e) => setRole(e.target.value)} required placeholder='Role' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
+</div>
               <div>
                 <button disabled={loading} className='blueCol flex justify-center items-center px-8 w-full py-2 font-semibold' >
                   {loading ? <TbLoader2 className='animate-spin' size={24} /> : "Register"}</button>
@@ -136,4 +128,4 @@ const registerHandler = (e) => {
 
     </>
   )
-
+}
