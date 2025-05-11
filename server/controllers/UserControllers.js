@@ -16,39 +16,21 @@ exports.register = async (req, res) => {
       throw new Error('Database pool is not initialized');
     }
 
-    const { name, email, password, avatar, skills, resume } = req.body;
-
-    // Upload avatar to Cloudinary
-    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-      folder: 'avatar',
-      crop: 'scale',
-    });
-
-    // Upload resume to Cloudinary
-    const myCloud2 = await cloudinary.v2.uploader.upload(resume, {
-      folder: 'resume',
-      crop: 'fit',
-    });
+    const { name, email, password,role } = req.body;
 
     // Hash the password
     const hashPass = await bcrypt.hash(password, 10);
 
-    // Convert skills array to a string for MySQL storage
-    const skillsString = JSON.stringify(skills);
 
     // MySQL query to insert user
     const [result] = await pool.query(
-      `INSERT INTO users (name, email, password, avatar_public_id, avatar_url, skills, resume_public_id, resume_url) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO users (name, email, password,role) 
+       VALUES (?, ?, ?, ?)`,
       [
         name,
         email,
         hashPass,
-        myCloud.public_id,
-        myCloud.secure_url,
-        skillsString,
-        myCloud2.public_id,
-        myCloud2.secure_url,
+        role,
       ]
     );
 
@@ -65,7 +47,6 @@ exports.register = async (req, res) => {
     }
 
     const user = userRows[0];
-    user.skills = JSON.parse(user.skills || '[]');
 
     // Create token
     const token = createToken(user.user_id, user.email);
@@ -93,7 +74,6 @@ exports.register = async (req, res) => {
   }
 };
 
-// ... (rest of your controller functions remain the same, but ensure they use the `pool` variable)
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;

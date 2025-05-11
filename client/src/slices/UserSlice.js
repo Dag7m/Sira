@@ -8,37 +8,19 @@ const UserSlice = createSlice({
         error: null,
         isLogin: false,
         me: {
-            avatar: {
-                public_id: "",
-                url: "",
-            },
-            resume: {
-                public_id: "",
-                url: "",
-            },
             _id: "",
             name: "",
             email: "",
             password: "",
             role: "",
-            skills: [],
             createdAt: ""
         },
         userDetails: {
-            avatar: {
-                public_id: "",
-                url: "",
-            },
-            resume: {
-                public_id: "",
-                url: "",
-            },
             _id: "",
             name: "",
             email: "",
             password: "",
             role: "",
-            skills: [],
             createdAt: ""
         },
     },

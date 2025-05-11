@@ -11,9 +11,7 @@ exports.registerValidator = () => [
     body('name').notEmpty().withMessage('Please enter name'),
     body('email').isEmail().withMessage('Please enter a valid email'),
     body('password').notEmpty().withMessage('Please enter password'),
-    body('avatar').notEmpty().withMessage('Please enter avatar'),
-    body('skills').notEmpty().withMessage('Please enter skills'),
-    body('resume').notEmpty().withMessage('Please enter resume')
+    body('role').notEmpty().withMessage('Please enter role'),
 ];
 
 exports.loginValidator = () => [

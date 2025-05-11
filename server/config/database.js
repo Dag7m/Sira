@@ -23,13 +23,8 @@ const createTables = async (pool) => {
         name VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
-        avatar_public_id VARCHAR(255),
-        avatar_url VARCHAR(255),
-        skills TEXT,
-        resume_public_id VARCHAR(255),
-        resume_url VARCHAR(255),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        role ENUM('job_seeker', 'employer') NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
     await connection.query(`
