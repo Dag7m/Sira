@@ -8,7 +8,7 @@ const UserSlice = createSlice({
         error: null,
         isLogin: false,
         me: {
-            _id: "",
+            user_id: "",
             name: "",
             email: "",
             password: "",
@@ -16,7 +16,7 @@ const UserSlice = createSlice({
             createdAt: ""
         },
         userDetails: {
-            _id: "",
+            user_id: "",
             name: "",
             email: "",
             password: "",
