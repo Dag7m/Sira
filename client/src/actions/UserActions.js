@@ -18,7 +18,7 @@ export const registerUser = (userData) => async (dispatch) => {
 
         dispatch(registerSuccess())
         localStorage.setItem('userToken', data.token)
-        //dispatch(logOrNot())//
+        dispatch(logOrNot())
         toast.success("Registration successful !")
 
     } catch (err) {

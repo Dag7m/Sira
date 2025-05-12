@@ -100,8 +100,7 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Parse skills back to array for response
-        user.skills = JSON.parse(user.skills || '[]');
+
 
         const token = createToken(user.user_id, user.email);
 
@@ -153,9 +152,6 @@ exports.me = async (req, res) => {
                 message: "User not found"
             });
         }
-
-        const user = userRows[0];
-        user.skills = JSON.parse(user.skills || '[]');
 
         res.status(200).json({
             success: true,
