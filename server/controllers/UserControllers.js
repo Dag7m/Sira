@@ -89,7 +89,6 @@ exports.login = async (req, res) => {
                 message: "User does not exist"
             });
         }
-
         const user = userRows[0];
         const isMatch = await bcrypt.compare(password, user.password);
 
@@ -103,6 +102,7 @@ exports.login = async (req, res) => {
 
 
         const token = createToken(user.user_id, user.email);
+        console.log("Generated Token:", token);
 
         res.status(200).json({
             success: true,
@@ -120,10 +120,11 @@ exports.login = async (req, res) => {
 };
 
 exports.isLogin = async (req, res) => {
+
     try {
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         res.status(200).json({
@@ -143,7 +144,8 @@ exports.me = async (req, res) => {
     try {
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
+  
         );
 
         if (userRows.length === 0) {
@@ -155,7 +157,7 @@ exports.me = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            user
+            user: userRows[0]
         });
 
     } catch (err) {
@@ -173,7 +175,7 @@ exports.changePassword = async (req, res) => {
         // Get user from database
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         if (userRows.length === 0) {
@@ -212,7 +214,7 @@ exports.changePassword = async (req, res) => {
         // Update password in database
         await pool.query(
             'UPDATE users SET password = ? WHERE user_id = ?',
-            [hashPass, req.user.id]
+            [hashPass, req.user.user_id]
         );
 
         res.status(200).json({
@@ -235,7 +237,7 @@ exports.updateProfile = async (req, res) => {
         // Get current user data
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         if (userRows.length === 0) {
@@ -281,7 +283,7 @@ exports.updateProfile = async (req, res) => {
                 myCloud1.secure_url,
                 myCloud2.public_id,
                 myCloud2.secure_url,
-                req.user.id
+                req.user.user_id
             ]
         );
 
@@ -303,7 +305,7 @@ exports.deleteAccount = async (req, res) => {
         // Get user from database
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         if (userRows.length === 0) {
@@ -330,7 +332,7 @@ exports.deleteAccount = async (req, res) => {
         // Delete user from database
         await pool.query(
             'DELETE FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         res.status(200).json({

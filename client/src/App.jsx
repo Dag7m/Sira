@@ -89,9 +89,7 @@ function App() {
           <Route path='/profile' element={<MyProfile />} />
           <Route path='/applied' element={<AppliedJobs />} />
           <Route path='/saved' element={<SavedJobs />} />
-          <Route path='/changePassword' element={<ChangePasswordconsole.log('App component rendered');
-console.log('User is logged in:', isLogin);
-console.log('User role:', localStorage.getItem('role')); />} />
+          <Route path='/changePassword' element={<ChangePassword />} />
           <Route path='/editProfile' element={<EditProfile />} />
           <Route path='/deleteAccount' element={<DeleteAccount />} />
           <Route path='/JobsLayout' element={<JobsLayout />} />

@@ -40,6 +40,7 @@ export const loginUser = (userData) => async (dispatch) => {
 
         dispatch(loginSuccess())
         localStorage.setItem('userToken', data.token)
+
         dispatch(logOrNot())
         dispatch(me())
         toast.success("Login successful !")
@@ -54,6 +55,7 @@ export const loginUser = (userData) => async (dispatch) => {
 export const logOrNot = () => async (dispatch) => {
     try {
         dispatch(isLoginRequest())
+
         const config = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('userToken')}`
