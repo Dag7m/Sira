@@ -1,5 +1,5 @@
 const app = require('./app');
-const { initializeDatabase, pool } = require('./config/database'); // Updated import
+const { initializeDatabase } = require('./config/database'); // ✅ Remove invalid `pool` import
 const cloudinary = require('cloudinary');
 const dotenv = require('dotenv');
 
@@ -12,15 +12,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Initialize database and start server
 async function startServer() {
   try {
-    // Initialize database (create tables if needed)
-    await initializeDatabase();
-    
-    // Make pool available throughout the app
+    // ✅ Initialize DB and get pool
+    const pool = await initializeDatabase();
+
+    // ✅ Make pool available globally or through app.locals
     app.locals.db = pool;
-    
+
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
