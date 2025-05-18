@@ -1,5 +1,12 @@
-const pool = require('../config/database');
 const cloudinary = require('cloudinary');
+const { initializeDatabase } = require('../config/database');
+
+let pool; // Pool will be initialized once
+
+// Initialize the pool when the module is loaded
+(async () => {
+  pool = await initializeDatabase();
+})();
 
 exports.createJob = async (req, res) => {
     try {

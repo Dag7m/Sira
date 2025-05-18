@@ -49,10 +49,11 @@ export const Navbar = () => {
 
                     {isLogin ? (
                         <Menu shadow="md" width={200}>
-                            <Menu.Target>
-                                <Avatar className='cursor-pointer fixed right-32' radius="xl" src={me.avatar.url} alt="it's me" />
-                            </Menu.Target>
-
+<Menu.Target>
+  <div className="cursor-pointer fixed right-32 font-semibold text-base">
+    {me.name} 
+  </div>
+</Menu.Target>
                             <Menu.Dropdown>
                                 <Link to="/profile"><Menu.Item icon={<FaUserCircle size={14} />}>My Profile</Menu.Item></Link>
                                 {me.role === "admin" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
@@ -78,9 +79,9 @@ export const Navbar = () => {
                         <div className='pr-12'>
                             {isLogin ? (
                                 <Menu shadow="md" width={200}>
-                                    <Menu.Target>
+                                    {/* <Menu.Target>
                                         <Avatar size={28} className='cursor-pointer' radius="xl" src={me.avatar.url} alt="it's me" />
-                                    </Menu.Target>
+                                    </Menu.Target> */}
 
                                     <Menu.Dropdown>
                                         <Link to="/profile"><Menu.Item icon={<FaUserCircle size={14} />}>My Profile</Menu.Item></Link>
