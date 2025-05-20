@@ -28,11 +28,11 @@ export const JobCard = ({ job }) => {
     return (
         <>
 
-            <Link to={`/details/${job._id}`} className='text-white flex flex-col gap-2  shadow-sm shadow-gray-800 border border-gray-700 md:px-4 px-3 w-full py-2'>
+            <Link to={`/details/${job.job_id}`} className='text-white flex flex-col gap-2  shadow-sm shadow-gray-800 border border-gray-700 md:px-4 px-3 w-full py-2'>
 
                 <div className='flex gap-5 relative'>
                     <div className='flex justify-center items-center  '>
-                        <img src={job.companyLogo.url} className=' w-[4rem]  ' alt="" />
+                        <img src={job.company_logo_url} className=' w-[4rem]  ' alt="" />
                     </div>
                     <div className='flex flex-col '>
 
@@ -41,7 +41,7 @@ export const JobCard = ({ job }) => {
                         </div>
                         <div className='flex justify-between gap-2 '>
                             <div className='flex flex-col gap-1'>
-                                <p className='text-sm'>{job.companyName}</p>
+                                <p className='text-sm'>{job.company_name}</p>
                                 <p className='text-sm'>{job.exp}</p>
                               {!isMobile && <p className='text-sm flex '>{job.description.slice(0, 64)}...</p>}
                                 <p className='text-sm flex md:hidden'>{job.description.slice(0, 39)}...</p>
@@ -59,8 +59,8 @@ export const JobCard = ({ job }) => {
                 </div>
 
                 <div className='flex md:gap-8 gap-3 md:text-sm text-xs'>
-                    <span>{convertDateFormat(job.createdAt.substr(0, 10))}</span>
-                    <span>{job.employmentType}</span>
+                    <span>{convertDateFormat(job.created_at.substr(0, 10))}</span>
+                    <span>{job.employment_type}</span>
                     <span>{job.location}</span>
                 </div>
 

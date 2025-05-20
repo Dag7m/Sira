@@ -13,7 +13,7 @@ const UserSlice = createSlice({
             email: "",
             password: "",
             role: "",
-            createdAt: ""
+            created_at: ""
         },
         userDetails: {
             user_id: "",
@@ -21,7 +21,7 @@ const UserSlice = createSlice({
             email: "",
             password: "",
             role: "",
-            createdAt: ""
+            created_at: ""
         },
     },
     reducers: {

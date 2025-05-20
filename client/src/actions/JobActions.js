@@ -35,6 +35,7 @@ export const getAllJobs = () => async (dispatch) => {
 
         dispatch(allJobsSuccess(data.Jobs)) ;
 
+
     }catch(err){
         dispatch(allJobsFail(err.response.data.message))   
     }
