@@ -3,31 +3,31 @@ import { createSlice } from "@reduxjs/toolkit";
 const JobSlice = createSlice({
     name: 'Job',
     initialState: {
+        allJobs: [],
         loading: false,
         saveJobLoading: false,
         error: null,
         jobDetails: {
-            __v: 0,
-            _id: "",
-            category: "",
-            companyLogo: {
-                public_id: "",
-                url: ""
-            },
-            companyName: "",
-            createdAt: "",
+            job_id: "",
+            title: "",
             description: "",
-            employmentType: "",
-            experience: "",
+            company_name: "",
+            company_logo_public_id: "",
+            company_logo_url: "",
             location: "",
-            postedBy: "",
+            skills_required: "",
+            experience: "",
+            category: "",
             salary: "",
-            skillsRequired: [],
-            status: "",
-            title: " "
+            employment_type: "",
+            posted_by: "",
+            created_at: "",
+            updated_at: "",
+
         },
-        savedJobs:[],
-        allJobs: []
+            savedJobs:[],
+
+
     },
     reducers: {
         newPostRequest: (state) => {

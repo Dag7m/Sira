@@ -59,7 +59,7 @@ exports.createJob = async (req, res) => {
 
 exports.allJobs = async (req, res) => {
     try {
-        const [jobs] = await pool.query(
+        const [Jobs] = await pool.query(
             `SELECT j.*, u.name as posted_by_name, u.email as posted_by_email 
              FROM jobs j
              JOIN users u ON j.posted_by = u.user_id`
@@ -67,7 +67,7 @@ exports.allJobs = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            jobs
+            Jobs
         });
 
     } catch (err) {

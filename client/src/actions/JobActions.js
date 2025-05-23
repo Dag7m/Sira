@@ -32,8 +32,8 @@ export const getAllJobs = () => async (dispatch) => {
         dispatch(allJobsRequest()) ;
 
         const {data} = await axios.get("http://localhost:5000/api/v1/jobs") ;
-
         dispatch(allJobsSuccess(data.Jobs)) ;
+
 
     }catch(err){
         dispatch(allJobsFail(err.response.data.message))   
