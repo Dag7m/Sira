@@ -23,7 +23,11 @@ const JobSlice = createSlice({
             posted_by: "",
             created_at: "",
             updated_at: "",
+
         },
+            savedJobs:[],
+
+
     },
     reducers: {
         newPostRequest: (state) => {
