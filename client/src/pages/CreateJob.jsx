@@ -58,8 +58,7 @@ export const CreateJob = () => {
 
   const postHandler = (e) => {
     e.preventDefault()
-    const skillsArr = skillsRequired.split(",")
-    const data = { title, description, companyName, location, logo, skillsRequired: skillsArr, experience, salary, category, employmentType }
+    const data = { title, description, companyName, logo, location, skillsRequired, experience, category, salary, employmentType }
 
     dispatch(createJobPost(data))
 
@@ -151,6 +150,27 @@ export const CreateJob = () => {
 
               </div>
               <div className='flex gap-3'>
+                {/* Location */}
+                <div className='bg-white flex justify-center items-center'>
+                  <div className='text-gray-600 px-2'>
+                    <MdOutlineLocationOn size={20} />
+                  </div>
+                  <input
+                    value={location} onChange={(e) => setLocation(e.target.value)}
+                    required placeholder='Location' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
+                </div>
+                 {/* Skills Required */}
+                <div className='bg-white w-full flex justify-center items-center'>
+                  <div className='text-gray-600 md:pb-12 pb-8 px-2'>
+                    <MdWorkspacesOutline size={20} />
+                  </div>
+                  <textarea
+                    value={skillsRequired} onChange={(e) => setSkillsRequired(e.target.value)}
+                    placeholder='Required Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
+                </div>
+
+              </div>
+              <div className='flex gap-3'>
                 {/* Experience */}
                 <div className='bg-white flex justify-center items-center'>
                   <div className='text-gray-600 px-2'>
@@ -162,15 +182,7 @@ export const CreateJob = () => {
                 </div>
 
 
-                {/* Location */}
-                <div className='bg-white flex justify-center items-center'>
-                  <div className='text-gray-600 px-2'>
-                    <MdOutlineLocationOn size={20} />
-                  </div>
-                  <input
-                    value={location} onChange={(e) => setLocation(e.target.value)}
-                    required placeholder='Location' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
-                </div>
+
 
 
                 {/* Salary */}
@@ -200,29 +212,18 @@ export const CreateJob = () => {
               </div>
 
               <div className='flex gap-3 w-[48rem]'>
-                {/* Skills Required */}
-                <div className='bg-white w-full flex justify-center items-center'>
-                  <div className='text-gray-600 md:pb-12 pb-8 px-2'>
-                    <MdWorkspacesOutline size={20} />
-                  </div>
-                  <textarea
-                    value={skillsRequired} onChange={(e) => setSkillsRequired(e.target.value)}
-                    placeholder='Required Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
-                </div>
-
-              </div>
-              <div className='flex gap-3'>
+               
                 {/* Category */}
                 <div className='bg-white flex justify-center items-center'>
 
 
                   <select required onChange={(e) => setCategory(e.target.value)} value={category} name="" id="large" className="block w-full px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
                     <option selected value="">Select Category</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Sales">Sales</option>
-                    <option value="Legal">Legal</option>
+                    <option value="1">Technology</option>
+                    <option value="2">Marketing</option>
+                    <option value="3">Finance</option>
+                    <option value="4">Sales</option>
+                    <option value="5">Legal</option>
                   </select>
                 </div>
 

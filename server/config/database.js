@@ -17,16 +17,21 @@ const createPool = () => mysql.createPool({
 const createTables = async (pool) => {
   const connection = await pool.getConnection();
   try {
+
+
     await connection.query(`
-      CREATE TABLE IF NOT EXISTS users (
+        CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
-        role ENUM('job_seeker', 'employer') NOT NULL,
+        role ENUM('job_seeker', 'admin') NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+    
+    
+    
     await connection.query(`
       CREATE TABLE IF NOT EXISTS jobs (
         job_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,16 +43,52 @@ const createTables = async (pool) => {
         location VARCHAR(255) NOT NULL,
         skills_required TEXT,
         experience VARCHAR(100),
-        category VARCHAR(100),
+        category_id INT NOT NULL,
         salary VARCHAR(100),
         employment_type VARCHAR(100),
         posted_by INT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (posted_by) REFERENCES users(user_id) ON DELETE CASCADE
+        FOREIGN KEY (category_id) REFERENCES job_categories(id) ON DELETE SET NULL
       )
     `);
-    console.log('Database tables verified/created');
+    
+    
+    
+    await connection.query(`
+    CREATE TABLE IF NOT EXISTS applications (
+    application_id INT AUTO_INCREMENT PRIMARY KEY,
+    job_id INT NOT NULL,
+    applicant_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE,
+    FOREIGN KEY (applicant_id) REFERENCES users(user_id) ON DELETE CASCADE
+      )
+    `);
+      
+    
+    await connection.query(`
+    CREATE TABLE IF NOT EXISTS job_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+     )
+    `);
+    
+    
+    
+    await connection.query(`
+    CREATE TABLE IF NOT EXISTS job_category_mappings (
+    job_id INT NOT NULL,
+    category_id INT NOT NULL,
+    PRIMARY KEY (job_id, category_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES job_categories(id) ON DELETE CASCADE
+    )
+   `);
+    
+   
+   console.log('Database tables verified/created');
   } catch (error) {
     console.error('Error creating tables:', error.message);
     throw error;

@@ -68,16 +68,16 @@ export const JobDetails = () => {
 
             {jobDetails && <div>
               <div className='flex pt-5 md:px-12 pl-4 md:gap-10 gap-5'>
-                {/* <div className=''> */}
-                  {/* <img src={jobDetails && jobDetails.companyLogo.url} className='md:h-32 h-24 w-24 md:w-32' alt="" /> */}
-                {/* </div> */}
+                <div className=''>
+                   <img src={jobDetails && jobDetails.company_logo_url} className='md:h-32 h-24 w-24 md:w-32' alt="" />
+                </div>
                 <div className='flex  items-center w-[6rem]'>
-                  <img src={jobDetails && jobDetails.companyLogo.url} className='' alt="" />
+                  <img src={jobDetails && jobDetails.company_logo_url} className='' alt="" />
                 </div>
                 <div className='flex flex-col gap-2 md:pt-2'>
                   <p className='text-xl flex gap-1 items-center  md:text-3xl'><BiBriefcase /> {jobDetails.title}</p>
-                  <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.companyName}</p>
-                  <p className='text-lg flex gap-2 items-center  md:text-2xl'><BsPersonWorkspace size={20} />{jobDetails.employmentType}</p>
+                  <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.company_name}</p>
+                  <p className='text-lg flex gap-2 items-center  md:text-2xl'><BsPersonWorkspace size={20} />{jobDetails.employment_type}</p>
                   <p className='text-lg flex gap-1.5 items-center  md:text-2xl'><HiStatusOnline size={20} /><span className={` ${jobDetails.status === "active" ? "text-green-700" : "text-red-500"} 
                   w-20 text-center rounded-lg font-semibold`} >
                     {jobDetails.status}
@@ -95,12 +95,12 @@ export const JobDetails = () => {
                 </div>
                 <div>
                   <ul className='flex flex-col gap-3'>
-                    <li className='flex items-center gap-3'>Posted By: <div>{jobDetails.postedBy.name}</div></li>
-                    <li className='flex items-center gap-3'>Posted At: <div>{convertDateFormat(jobDetails.createdAt.substr(0, 10))}</div></li>
+                    <li className='flex items-center gap-3'>Posted By: <div>{jobDetails.posted_by}</div></li>
+                    <li className='flex items-center gap-3'>Posted At: <div>{convertDateFormat(jobDetails.created_at.substr(0, 10))}</div></li>
                     <li className='flex items-center gap-3'>Location: <div> {jobDetails.location}</div></li>
-                    <li className='flex items-center gap-3'>Salary: <div className='flex items-center' ><BiRupee />  <span>{(jobDetails.salary  / 100000).toFixed(0)} LPA</span></div></li>
+                    <li className='flex items-center gap-3'>Salary: <div className='flex items-center' > <span>{(jobDetails.salary)}ETB</span></div></li>
                     <li className='flex items-center gap-3'>Experience: <div> {jobDetails.experience}</div></li>
-                    <li className='flex items-center gap-3'>Skills Required: <div className='flex flex-wrap items-center gap-3'> {jobDetails.skillsRequired.map((e,i) => (<span key={i} className='px-2 py-0.5 bg-yellow-600 rounded text-black md:text-sm font-semibold text-xs'>{e}</span>))}                     </div></li>
+                    <li className='flex items-center gap-3'>Skills Required: <div className='flex flex-wrap items-center gap-3'> {jobDetails.skills_required}                     </div></li>
                     <li className='grid gird-cols-1 gap-2 pt-2'><div className='text-2xl'>Job Description: </div> <div> {jobDetails.description}</div></li>
                   </ul>
                 </div>
@@ -112,15 +112,15 @@ export const JobDetails = () => {
 
                     isLogin ? 
                     
-                    me.appliedJobs && me.appliedJobs.includes(jobDetails._id) ? toast.error("You are already applied !") :
-                    navigate(`/Application/${jobDetails._id}`)
+                    me.appliedJobs && me.appliedJobs.includes(jobDetails.job_id) ? toast.error("You are already applied !") :
+                    navigate(`/Application/${jobDetails.job_id}`)
 
                     : 
                     notLoginHandler("apply")
                     
                     
                   }}
-                className=' hover:bg-green-600 md:text-lg text-sm  font-bold px-10 py-1.5 bg-green-800 flex items-center gap-1 '> <BsSend /> {me.appliedJobs && me.appliedJobs.includes(jobDetails._id) ? "Applied" : "Apply"}</button>
+                className=' hover:bg-green-600 md:text-lg text-sm  font-bold px-10 py-1.5 bg-green-800 flex items-center gap-1 '> <BsSend /> {me.appliedJobs && me.appliedJobs.includes(jobDetails.job_id) ? "Applied" : "Apply"}</button>
 
 
                 <button onClick={
@@ -141,7 +141,7 @@ export const JobDetails = () => {
                       <AiOutlineSave />
                     {
                   
-                      me.savedJobs && me.savedJobs.includes(jobDetails._id) ? "UnSave" : "Save"
+                      me.savedJobs && me.savedJobs.includes(jobDetails.job_id) ? "UnSave" : "Save"
                     }
                   </>
                   
