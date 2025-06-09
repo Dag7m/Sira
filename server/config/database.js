@@ -37,20 +37,21 @@ const createTables = async (pool) => {
         job_id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
-        company_name VARCHAR(255) NOT NULL,
+        company_id INT NOT NULL,
         company_logo_public_id VARCHAR(255),
         company_logo_url VARCHAR(255),
         location VARCHAR(255) NOT NULL,
         skills_required TEXT,
         experience VARCHAR(100),
-        category_id INT NOT NULL,
+        category_id INT NULL,
         salary VARCHAR(100),
         employment_type VARCHAR(100),
         posted_by INT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (posted_by) REFERENCES users(user_id) ON DELETE CASCADE
-        FOREIGN KEY (category_id) REFERENCES job_categories(id) ON DELETE SET NULL
+        FOREIGN KEY (posted_by) REFERENCES users(user_id) ON DELETE CASCADE,
+        FOREIGN KEY (category_id) REFERENCES job_categories(id) ON DELETE SET NULL,
+        FOREIGN KEY (company_id) REFERENCES companies(id) ON DELETE CASCADE
       )
     `);
     
@@ -86,8 +87,26 @@ const createTables = async (pool) => {
     FOREIGN KEY (category_id) REFERENCES job_categories(id) ON DELETE CASCADE
     )
    `);
-    
-   
+  await connection.query(`
+  CREATE TABLE IF NOT EXISTS saved_jobs (
+  user_id INT NOT NULL,
+  job_id INT NOT NULL,
+  saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id, job_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE
+)`);
+
+  await connection.query(` 
+  CREATE TABLE IF NOT EXISTS companies (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) `);
+
+
    console.log('Database tables verified/created');
   } catch (error) {
     console.error('Error creating tables:', error.message);

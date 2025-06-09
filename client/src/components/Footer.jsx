@@ -41,7 +41,7 @@ export const Footer = () => {
           <div className="flex flex-col justify-center items-center pt-5">
             <p className="titleT text-2xl flex justify-center items-center">
               {" "}
-              <MdOutlineBusinessCenter /> JOBLANE
+              <MdOutlineBusinessCenter /> ስራ
             </p>
             <p className="text-sm text-gray-300">
               Giving best opportunities to best peoples.
@@ -74,16 +74,10 @@ export const Footer = () => {
 
         <div className="flex flex-col pt-3 justify-center items-center">
           <p className="text-sm">
-            Designed and Developed by{" "}
-            <Link
-              target="_blank"
-              className="underline text-blue-400"
-              to="https://sujal-tangde.netlify.app/"
-            >
-              Sujal Tangde
-            </Link>
+            Designed and Developed by Database group Job portal
+            
           </p>
-          <p className="text-sm"> &copy;Copyright, All rights reserved.</p>
+
         </div>
 
         <div></div>

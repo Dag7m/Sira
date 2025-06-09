@@ -25,7 +25,7 @@ export const SaveJobCard = ({ job }) => {
     const isMobile = useIsMobile()
 
     const unSaveJobHandler = () => {
-        dispatch(saveJob(job._id))
+        dispatch(saveJob(job.job_id))
     }
 
 
@@ -34,7 +34,7 @@ export const SaveJobCard = ({ job }) => {
 
             <div className='flex gap-5 relative'>
                 <div className='flex justify-center items-center '>
-                    <img src={job.companyLogo.url} className='md:w-[5em] h-16 w-16  md:h-20' alt="" />
+                    <img src={job.company_logo_url} className='md:w-[5em] h-16 w-16  md:h-20' alt="" />
                 </div>
                 <div className='flex flex-col '>
 
@@ -43,13 +43,13 @@ export const SaveJobCard = ({ job }) => {
                     </div>
                     <div className='flex justify-between gap-2 '>
                         <div className='flex flex-col gap-1'>
-                            <p className='text-sm'>{job.companyName}</p>
+                            <p className='text-sm'>{job.company_name}</p>
                             <p className='text-sm'>{job.exp}</p>
                          {!isMobile && <p className='text-sm md:flex '>{job.description.slice(0, 90)}...</p>}
                             <p className='text-sm flex md:hidden'>{job.description.slice(0, 25)}...</p>
                         </div>
                         <div className='absolute md:right-3 right-0 md:pt-0 top-7 text-sm flex flex-col gap-6' >
-                            <Link to={`/details/${job._id}`} className='blueCol font-semibold md:text-sm text-xs px-3 py-1 text-center ' >Apply</Link>
+                            <Link to={`/details/${job.job_id}`} className='blueCol font-semibold md:text-sm text-xs px-3 py-1 text-center ' >Apply</Link>
                             <button onClick={unSaveJobHandler} className='blueCol font-semibold md:text-sm text-xs px-3 py-1 text-center ' >UnSave</button>
                         </div>
 
@@ -62,8 +62,8 @@ export const SaveJobCard = ({ job }) => {
             </div>
 
             <div className='flex md:gap-8 gap-3 md:text-sm text-xs'>
-                <span>{convertDateFormat(job.createdAt.substr(0, 10))}</span>
-                <span>{job.employmentType}</span>
+                <span>{convertDateFormat(job.created_at.substr(0, 10))}</span>
+                <span>{job.employment_type}</span>
                 <span>{job.location}</span>
             </div>
 
