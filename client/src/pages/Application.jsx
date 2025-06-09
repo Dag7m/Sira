@@ -42,7 +42,7 @@ export const Application = () => {
 
 
                     <div className='py-2'>
-                        <p className='text-4xl py-2 pb-2'>Apply to {jobDetails.companyName}</p>
+                        <p className='text-4xl py-2 pb-2'>Apply to {jobDetails.company_name}</p>
                         <p className="text-xl">Job Id: {id}</p>
                     </div>
 
@@ -63,8 +63,8 @@ export const Application = () => {
                             <ul>
                                 <li className='flex gap-4 items-center'>Name: <div>{me.name}</div></li>
                                 <li className='flex gap-4 items-center'>Email: <div>{me.email}</div></li>
-                                <li className='flex gap-4 items-center'>Resume: <Link path="_blank" to={me.resume.url} target="_blank" 
-  rel="noreferrer" className='text-blue-500 underline cursor-pointer'>{me.name} resume</Link></li>
+                                {/* <li className='flex gap-4 items-center'>Resume: <Link path="_blank" to={me.resume.url} target="_blank" 
+  rel="noreferrer" className='text-blue-500 underline cursor-pointer'>{me.name} resume</Link></li> */}
                             </ul>
                         </div>
 

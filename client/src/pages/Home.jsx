@@ -109,20 +109,20 @@ export const Home = () => {
                 <div className='  w-full  flex  pt-28 flex-col justify-start  items-center gap-4'>
 
                     <div className='flex md:flex-row flex-col items-center justify-center md:gap-10 gap-1'>
-                        <div className='md:text-8xl text-6xl titleT'>JOBLANE</div>
+                            <div className='md:text-8xl text-6xl titleT'>ስራ</div>
                         <div className=' flex justify-center items-center pt-1'>
                             <Link to="/jobs" className='font-semibold md:text-2xl text-lg blueCol  md:py-3 py-2 px-6 md:px-10 '>Browse Jobs</Link>
                         </div>
                     </div>
                     <div>
-                        <p className='md:text-xl text-sm'>Your <span className='text-yellow-500'>gateway</span> to job opportunities.</p>
+                        <p className='md:text-xl text-sm'>Your <span className='text-yellow-500'>gateway</span> to job opportunities in Ethiopia and The Globe.</p>
                         
                     </div>
 
 
                     <div className='pt-[8rem] md:px-[1rem] px-[0rem] w-full'>
                         <div className='titleT pb-6 text-2xl'>
-                            <p className='titleT'>Featured Jobs</p>
+                            {/* <p className='titleT'>Featured Jobs</p> */}
                         </div>
                         <div>
                             {
@@ -233,10 +233,10 @@ export const Home = () => {
                     </div>
                     
 
-                    <Testimonials />
+                    {/* <Testimonials /> */}
                     
                     <div className="pt-[7rem] pb-[10rem] md:px-[14rem] px-[1rem]   text-center">
-                        <p>Discover the Power of Possibility with JobLane: Where Your Professional Journey Takes Flight, Guided by a Network of Diverse Opportunities!</p>
+                        <p>Discover the Power of Possibility with SIRA: Where Your Professional Journey Takes Flight, Guided by a Network of Diverse Opportunities!</p>
                     </div>
 
 

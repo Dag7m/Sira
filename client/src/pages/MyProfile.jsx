@@ -49,10 +49,10 @@ export const MyProfile = () => {
 
 
                 <div className=' md:w-1/2 w-full md:pb-0 pt-16  md:pt-10 gap-8 flex flex-col justify-start items-center '>
-                  <div className=' w-72 h-72 flex md:justify-center justify-start items-center  '>
+             {/*      <div className=' w-72 h-72 flex md:justify-center justify-start items-center  '>
 
                     <img src={me.avatar.url} className='rounded-full w-full h-full' alt="" />
-                  </div>
+                  </div> */}
                   <div className='flex justify-center items-center'>
                     <Link to="/editProfile" className='blueCol px-10 py-2 font-semibold'>Edit Profile</Link>
                   </div>
@@ -72,15 +72,15 @@ export const MyProfile = () => {
                     </div>
                     <div>
                       <p className='md:text-2xl text-xl'>Joined On</p>
-                      <p className='md:text-xl pt-1 text-lg'>{convertDateFormat(me.createdAt.substr(0, 10))}</p>
+                      <p className='md:text-xl pt-1 text-lg'>{convertDateFormat(me.created_at.substr(0, 10))}</p>
                     </div>
                     <div>
                       <p className='md:text-2xl text-xl'>Skills</p>
-                      <div className='md:text-xl text-lg pt-3 flex gap-3'>{
+                     {/*  <div className='md:text-xl text-lg pt-3 flex gap-3'>{
                         me.skills.map((skill, i) => (
                           <span key={i} className='bg-yellow-500 text-black  text-sm px-2 py-1  font-bold '>{skill}</span>
                         ))
-                      }</div>
+                      }</div> */}
                     </div>
 
 
@@ -109,9 +109,9 @@ export const MyProfile = () => {
                   </div>
                 </div>
                 <Modal opened={opened} onClose={close} title="Resume">
-                  <div>
+{/*                   <div>
                     <img src={me.resume.url} className='w-full h-full' alt="" />
-                  </div>
+                  </div> */}
                  
                 </Modal>
                

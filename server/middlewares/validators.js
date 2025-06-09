@@ -41,12 +41,12 @@ exports.jobValidator = () => [
     body('title').notEmpty().withMessage('Please enter title'),
     body('description').notEmpty().withMessage('Please enter description'),
     body('companyName').notEmpty().withMessage('Please enter company name'),
-    body('location').notEmpty().withMessage('Please enter location'),
     body('logo').notEmpty().withMessage('Please enter logo URL'),
+    body('location').notEmpty().withMessage('Please enter location'),
     body('skillsRequired').notEmpty().withMessage('Please enter skills required'),
     body('experience').notEmpty().withMessage('Please enter experience'),
-    body('salary').notEmpty().withMessage('Please enter salary'),
     body('category').notEmpty().withMessage('Please enter category'),
+    body('salary').notEmpty().withMessage('Please enter salary'),
     body('employmentType').notEmpty().withMessage('Please enter employment type')
 ];
 

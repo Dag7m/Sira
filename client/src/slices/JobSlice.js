@@ -69,9 +69,16 @@ const JobSlice = createSlice({
         jobSaveRequest: (state) => {
             state.saveJobLoading = true;
         },
-        jobSaveSuccess: (state) => {
-            state.saveJobLoading = false;
-        },
+      jobSaveSuccess: (state, action) => {
+  state.saveJobLoading = false;
+  const jobId = action.payload;
+
+  if (state.savedJobs.includes(jobId)) {
+    state.savedJobs = state.savedJobs.filter(id => id !== jobId); // Unsave
+  } else {
+    state.savedJobs.push(jobId); // Save
+  }
+},
         jobSaveFail: (state, action) => {
             state.saveJobLoading = false;
             state.error = action.payload;
@@ -83,7 +90,7 @@ const JobSlice = createSlice({
         },
         getSavedJobsSuccess: (state, action) => {
             state.loading = false 
-            state.savedJobs = action.payload.savedJob
+            state.savedJobs = action.payload
         },
         getSavedJobsFail: (state, action) => {
             state.loading = false
