@@ -29,9 +29,39 @@ const createTables = async (pool) => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
-    
-    
-    
+        await connection.query(`
+    CREATE TABLE IF NOT EXISTS Profiles (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  bio TEXT,
+  resume_url VARCHAR(255),
+  skills JSON,
+  avatar VARCHAR(255),
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+)
+     `);
+            await connection.query(`
+  CREATE TABLE IF NOT EXISTS Educations (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  degree VARCHAR(100),
+  institution VARCHAR(150),
+  start_year YEAR,
+  end_year YEAR,
+  field_of_study VARCHAR(100),
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+)   `);
+    await connection.query(`
+   CREATE TABLE IF NOT EXISTS Work_Experience (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  company_name VARCHAR(150),
+  job_title VARCHAR(100),
+  start_date DATE,
+  end_date DATE,
+  description TEXT,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+)`);
     await connection.query(`
       CREATE TABLE IF NOT EXISTS jobs (
         job_id INT AUTO_INCREMENT PRIMARY KEY,

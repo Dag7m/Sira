@@ -6,16 +6,49 @@ import { Link } from 'react-router-dom'
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button, Group } from '@mantine/core';
 import { useNavigate } from 'react-router-dom'
-
+import axios from 'axios';
 
 
 export const MyProfile = () => {
+const [educations, setEducations] = useState([]);
+const [experiences, setExperiences] = useState([]);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem('userToken');
 
+      const eduRes = await axios.get('http://localhost:5000/api/profile/educations', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const expRes = await axios.get('http://localhost:5000/api/profile/experiences', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      setEducations(eduRes.data);
+      setExperiences(expRes.data);
+    } catch (error) {
+      console.error("Failed to fetch profile data:", error);
+    }
+  };
+
+  fetchData();
+}, []);
   const { loading, me, isLogin } = useSelector(state => state.user)
   const [opened, { open, close }] = useDisclosure(false);
 
   const navigate = useNavigate()
-
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-GB', {
+      year: 'numeric',
+      month: 'short',
+    });
+  };
   const convertDateFormat = (inputDate) => {
     const parts = inputDate.split('-');
     if (parts.length !== 3) {
@@ -53,9 +86,33 @@ export const MyProfile = () => {
 
                     <img src={me.avatar.url} className='rounded-full w-full h-full' alt="" />
                   </div> */}
-                  <div className='flex justify-center items-center'>
-                    <Link to="/editProfile" className='blueCol px-10 py-2 font-semibold'>Edit Profile</Link>
-                  </div>
+<div className="mt-12">
+  <h2 className="text-2xl font-semibold underline mb-4">Work Experience</h2>
+  {experiences.length === 0 ? <p>No experiences added.</p> : (
+    experiences.map(exp => (
+      <div key={exp.id} className="bg-gray-800 p-4 rounded-lg mb-4">
+        <h3 className="text-xl font-bold">{exp.job_title} @ {exp.company_name}</h3>
+        <p className="text-sm">{formatDate(exp.start_date)} - {formatDate(exp.end_date) || 'Present'}</p>
+        <p className="pt-2">{exp.description}</p>
+      </div>
+    ))
+  )}
+</div>
+
+<div className="mt-12">
+  <h2 className="text-2xl font-semibold underline mb-4">Education</h2>
+  {educations.length === 0 ? <p>No education records found.</p> : (
+    educations.map(edu => (
+      <div key={edu.id} className="bg-gray-800 p-4 rounded-lg mb-4">
+        <h3 className="text-xl font-bold">{edu.degree} in {edu.field_of_study}</h3>
+        <p>{edu.institution}</p>
+        <p>{edu.start_year} - {edu.end_year}</p>
+      </div>
+    ))
+  )}
+</div>
+
+
                 </div>
 
 
@@ -74,21 +131,21 @@ export const MyProfile = () => {
                       <p className='md:text-2xl text-xl'>Joined On</p>
                       <p className='md:text-xl pt-1 text-lg'>{convertDateFormat(me.created_at.substr(0, 10))}</p>
                     </div>
-                    <div>
+                  {/*  <div>
                       <p className='md:text-2xl text-xl'>Skills</p>
-                     {/*  <div className='md:text-xl text-lg pt-3 flex gap-3'>{
+                       <div className='md:text-xl text-lg pt-3 flex gap-3'>{
                         me.skills.map((skill, i) => (
                           <span key={i} className='bg-yellow-500 text-black  text-sm px-2 py-1  font-bold '>{skill}</span>
                         ))
-                      }</div> */}
-                    </div>
+                      }</div> 
+                    </div>*/}
 
 
 
                     <div className='flex md:flex-row flex-col md:gap-8 pt-4 gap-3'>
                       <ul className='flex flex-col gap-4'>
-
-                        <li className=' '> <Link  ><button onClick={open} className='blueCol w-2/3 md:w-full  font-medium px-6 py-1'>My Resume</button></Link> </li>
+{/* 
+                        <li className=' '> <Link  ><button onClick={open} className='blueCol w-2/3 md:w-full  font-medium px-6 py-1'>My Resume</button></Link> </li> */}
                         <li className=' '>
                           <Link to="/applied"><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>My Applications</button></Link>
                         </li>
@@ -103,7 +160,9 @@ export const MyProfile = () => {
                         </li>
                         <li className=' '><Link to="/deleteAccount"><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Delete Account</button></Link></li>
                       </ul>
-
+                  <div className='flex justify-center items-center'>
+                    <Link to="/editProfile" className='blueCol px-10 py-2 font-semibold'>Edit Profile</Link>
+                  </div>
                     </div>
 
                   </div>
