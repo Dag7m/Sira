@@ -1,67 +1,68 @@
-import React, { useEffect } from 'react'
-import {MetaData} from '../components/MetaData'
-import {useDispatch, useSelector} from 'react-redux'
-import {getAppliedJob} from '../actions/ApplicationActions'
-import {Loader} from '../components/Loader'
-import { AppliedJobCard } from '../components/AppliedJobCard'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
+const AppliedJobs = () => {
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-export const AppliedJobs = () => {
+  const fetchApplications = async () => {
+    try {
+      const token = localStorage.getItem('userToken');
+      const res = await axios.get('http://localhost:5000/api/v1/getAllApplication', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  const {loading, appliedJobs} = useSelector(state => state.application) ;
-  const dispatch = useDispatch()
+      // ✅ FIXED: Your controller returns { success, allApplications }
+      setApplications(res.data.allApplications);
+    } catch (error) {
+      console.error('Failed to fetch applications:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    fetchApplications();
+  }, []);
 
-  useEffect(()=>{
-    dispatch(getAppliedJob())
-  },[])
-
-
-
+  const handleViewDetails = (jobId) => {
+    navigate(`/details/${jobId}`);
+  };
 
   return (
-    <>
-
-<MetaData title="Applied Jobs" />
-      <div className='bg-gray-950 min-h-screen pt-14 md:px-20 px-3  text-white'>
-        {loading? 
-           <Loader/> :
-           <>
-
-             <div className='pt-6 md:px-28 px-1 pb-32' >
-                  {appliedJobs.length !== 0 && <div className='text-center text-3xl pb-4 font-medium'>Applied Jobs</div>}
-                {
-                  <div className='flex flex-col gap-4'>
-                    {
-                      appliedJobs.slice().reverse().map((app,i)=>(
-                        <AppliedJobCard key={i} id={app.application_id} time={app.created_at} job={app.job_id}/>
-                      ))
-                    }
-                  </div>
-                }
-                {
-                  appliedJobs.length === 0 && 
-                  <div className='pt-10 text-center flex flex-col justify-center items-center'>
-
-
-                        <div>
-                          <img src="/images/jobEmpty.svg" className='w-52 h-52' alt="" />
-                        </div>
-                      <p className='md:text-3xl pb-3 pt-4 text-xl '>You don't have any applied jobs !</p>
-                      <Link to="/jobs" className='blueCol px-5 py-1'>Browse Jobs</Link>
-                  </div>
-                }
-
+    <div className="min-h-screen bg-gray-900 text-white px-4 pt-24 py-8">
+      <h1 className="text-3xl font-bold mb-6">My Applications</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : applications.length === 0 ? (
+        <p>No applications found.</p>
+      ) : (
+        <div className="grid gap-4">
+          {applications.map((app) => (
+            <div
+              key={app.application_id}
+              className="bg-gray-800 p-5 rounded shadow-md flex flex-col md:flex-row md:items-center justify-between"
+            >
+              <div>
+                <p className="text-lg font-semibold">{app.job_title}</p>
+                <p className="text-sm text-gray-400">Applied on: {new Date(app.created_at).toLocaleDateString()}</p>
+              </div>
+              <button
+                onClick={() => handleViewDetails(app.job_id)}
+                className="mt-4 md:mt-0 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm font-medium"
+              >
+                View Application
+              </button>
             </div>
-           
-           </>
-       }
-
-
+          ))}
         </div>
-    
-    
-    </>
-  )
-}
+      )}
+    </div>
+  );
+};
+
+export default AppliedJobs;

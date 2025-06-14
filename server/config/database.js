@@ -135,8 +135,12 @@ const createTables = async (pool) => {
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) `);
-
-
+  await connection.query(`
+CREATE TABLE IF NOT EXISTS admins (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+)`);
    console.log('Database tables verified/created');
   } catch (error) {
     console.error('Error creating tables:', error.message);
