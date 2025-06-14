@@ -15,7 +15,7 @@ export const About = () => {
         Our mission is to connect talented individuals with remarkable
         opportunities that elevate their careers and enrich their lives.
         Whether you're a recent graduate stepping into the workforce or a
-        seasoned professional seeking new horizons, JobLane is here to
+        seasoned professional seeking new horizons, Sira is here to
         guide you every step of the way.
       </p>
     </div>
@@ -50,7 +50,7 @@ export const About = () => {
         work, one opportunity at a time.
       </p>
       <p className="pt-4">
-        Thank you for choosing JobLane as your partner in career
+        Thank you for choosing Sira as your partner in career
         advancement. Here's to unlocking a world of possibilities and
         achieving greatness together!
       </p>

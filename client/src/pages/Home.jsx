@@ -18,37 +18,37 @@ export const Home = () => {
 
     const data = [
         {
-            link: "/images/JobData/1.jpg"
+            link: "/images/JobData/1.png"
         },
         {
-            link: "/images/JobData/2.jpg"
+            link: "/images/JobData/2.png"
         },
         {
             link: "/images/JobData/3.jpg"
         },
         {
-            link: "/images/JobData/4.jpg"
+            link: "/images/JobData/4.png"
         },
         {
-            link: "/images/JobData/5.jpg"
+            link: "/images/JobData/5.png"
         },
         {
             link: "/images/JobData/6.jpg"
         },
         {
-            link: "/images/JobData/7.jpg"
+            link: "/images/JobData/7.png"
         },
         {
-            link: "/images/JobData/8.jpg"
+            link: "/images/JobData/8.png"
         },
         {
-            link: "/images/JobData/9.jpg"
+            link: "/images/JobData/9.png"
         },
         {
-            link: "/images/JobData/10.jpg"
+            link: "/images/JobData/10.png"
         },
         {
-            link: "/images/JobData/11.jpg"
+            link: "/images/JobData/ride.png"
         },
         {
             link: "/images/JobData/12.jpg"
@@ -57,10 +57,10 @@ export const Home = () => {
             link: "/images/JobData/13.jpg"
         },
         {
-            link: "/images/JobData/14.jpg"
+            link: "/images/JobData/14.png"
         },
         {
-            link: "/images/JobData/15.jpg"
+            link: "/images/JobData/15.png"
         },
         {
             link: "/images/JobData/16.jpg"
@@ -104,7 +104,7 @@ export const Home = () => {
 
 
         <>
-            <MetaData title="JobLane" />
+            <MetaData title="Sira" />
             <div className='min-h-screen md:px-20 px-3  pt-14 flex   text-white bg-gray-950'>
                 <div className='  w-full  flex  pt-28 flex-col justify-start  items-center gap-4'>
 

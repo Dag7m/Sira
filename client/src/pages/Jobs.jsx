@@ -33,12 +33,14 @@ export const Jobs = () => {
   const data = ["Technology", "Marketing", "Finance", "Sales", "Legal"]
 
   const companyData = [
-    "Google",
-    "Apple",
-    "Paypal",
-    "Samsung",
-    "Amazon",
-    "Oracle"
+    "Addis Ababa University",
+    "Ethiopian Airlines",
+    "Ethio-Telecom",
+    "CBE",
+    "Ethio-Electric",
+    "Ethio-Post",
+    "Midroc",
+    "Ethiopian Red Cross"
   ]
 
   console.log(allJobs.length)
