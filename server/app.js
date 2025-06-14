@@ -16,7 +16,7 @@ app.use(cors({
 
 app.use(fileUpload())
 
-
+const profileRoutes = require('./routes/profileRoutes');
 const User = require('./routes/UserRoutes')
 const Job = require('./routes/JobRoutes')
 const Application = require('./routes/ApplicationRoutes')
@@ -27,7 +27,7 @@ app.use("/api/v1",User)
 app.use("/api/v1",Job)
 app.use("/api/v1",Application)
 app.use("/api/v1",Admin)
-
+app.use('/api/profile', profileRoutes);
 app.get("/",(req,res)=>{
     res.json("I am working")
 })                           

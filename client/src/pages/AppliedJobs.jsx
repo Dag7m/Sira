@@ -35,7 +35,7 @@ export const AppliedJobs = () => {
                   <div className='flex flex-col gap-4'>
                     {
                       appliedJobs.slice().reverse().map((app,i)=>(
-                        <AppliedJobCard key={i} id={app.application_id} time={app.created_at} job={app.job}/>
+                        <AppliedJobCard key={i} id={app.application_id} time={app.created_at} job={app.job_id}/>
                       ))
                     }
                   </div>
