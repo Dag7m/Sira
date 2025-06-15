@@ -1,4 +1,3 @@
-const pool = require('../config/database');
 const cloudinary = require('cloudinary');
 const { initializeDatabase } = require('../config/database');
 
