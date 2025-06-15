@@ -18,37 +18,37 @@ export const Home = () => {
 
     const data = [
         {
-            link: "/images/JobData/1.jpg"
+            link: "/images/JobData/1.png"
         },
         {
-            link: "/images/JobData/2.jpg"
+            link: "/images/JobData/2.png"
         },
         {
             link: "/images/JobData/3.jpg"
         },
         {
-            link: "/images/JobData/4.jpg"
+            link: "/images/JobData/4.png"
         },
         {
-            link: "/images/JobData/5.jpg"
+            link: "/images/JobData/5.png"
         },
         {
             link: "/images/JobData/6.jpg"
         },
         {
-            link: "/images/JobData/7.jpg"
+            link: "/images/JobData/7.png"
         },
         {
-            link: "/images/JobData/8.jpg"
+            link: "/images/JobData/8.png"
         },
         {
-            link: "/images/JobData/9.jpg"
+            link: "/images/JobData/9.png"
         },
         {
-            link: "/images/JobData/10.jpg"
+            link: "/images/JobData/10.png"
         },
         {
-            link: "/images/JobData/11.jpg"
+            link: "/images/JobData/ride.png"
         },
         {
             link: "/images/JobData/12.jpg"
@@ -57,10 +57,10 @@ export const Home = () => {
             link: "/images/JobData/13.jpg"
         },
         {
-            link: "/images/JobData/14.jpg"
+            link: "/images/JobData/14.png"
         },
         {
-            link: "/images/JobData/15.jpg"
+            link: "/images/JobData/15.png"
         },
         {
             link: "/images/JobData/16.jpg"
@@ -104,25 +104,25 @@ export const Home = () => {
 
 
         <>
-            <MetaData title="JobLane" />
+            <MetaData title="Sira" />
             <div className='min-h-screen md:px-20 px-3  pt-14 flex   text-white bg-gray-950'>
                 <div className='  w-full  flex  pt-28 flex-col justify-start  items-center gap-4'>
 
                     <div className='flex md:flex-row flex-col items-center justify-center md:gap-10 gap-1'>
-                        <div className='md:text-8xl text-6xl titleT'>JOBLANE</div>
+                            <div className='md:text-8xl text-6xl titleT'>ስራ</div>
                         <div className=' flex justify-center items-center pt-1'>
                             <Link to="/jobs" className='font-semibold md:text-2xl text-lg blueCol  md:py-3 py-2 px-6 md:px-10 '>Browse Jobs</Link>
                         </div>
                     </div>
                     <div>
-                        <p className='md:text-xl text-sm'>Your <span className='text-yellow-500'>gateway</span> to job opportunities.</p>
+                        <p className='md:text-xl text-sm'>Your <span className='text-yellow-500'>gateway</span> to job opportunities in Ethiopia and The Globe.</p>
                         
                     </div>
 
 
                     <div className='pt-[8rem] md:px-[1rem] px-[0rem] w-full'>
                         <div className='titleT pb-6 text-2xl'>
-                            <p className='titleT'>Featured Jobs</p>
+                            {/* <p className='titleT'>Featured Jobs</p> */}
                         </div>
                         <div>
                             {
@@ -233,10 +233,10 @@ export const Home = () => {
                     </div>
                     
 
-                    <Testimonials />
+                    {/* <Testimonials /> */}
                     
                     <div className="pt-[7rem] pb-[10rem] md:px-[14rem] px-[1rem]   text-center">
-                        <p>Discover the Power of Possibility with JobLane: Where Your Professional Journey Takes Flight, Guided by a Network of Diverse Opportunities!</p>
+                        <p>Discover the Power of Possibility with SIRA: Where Your Professional Journey Takes Flight, Guided by a Network of Diverse Opportunities!</p>
                     </div>
 
 

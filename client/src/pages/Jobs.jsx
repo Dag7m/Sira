@@ -33,12 +33,14 @@ export const Jobs = () => {
   const data = ["Technology", "Marketing", "Finance", "Sales", "Legal"]
 
   const companyData = [
-    "Google",
-    "Apple",
-    "Paypal",
-    "Samsung",
-    "Amazon",
-    "Oracle"
+    "Addis Ababa University",
+    "Ethiopian Airlines",
+    "Ethio-Telecom",
+    "CBE",
+    "Ethio-Electric",
+    "Ethio-Post",
+    "Midroc",
+    "Ethiopian Red Cross"
   ]
 
   console.log(allJobs.length)
@@ -116,7 +118,7 @@ export const Jobs = () => {
       return
     }
     const rightFilArr = jobsList.filter((item) => (
-      item.companyName.toLowerCase() === company.toLowerCase()
+      item.company_name.toLowerCase() === company.toLowerCase()
     ))
     setJobs(rightFilArr)
 
@@ -252,14 +254,14 @@ export const Jobs = () => {
                     {
                       // jobs && jobs
                       jobs && displayedData
-                        .filter(job => job._id)
+                        .filter(job => job.job_id)
                         .sort((a, b) => {
-                          const dateA = new Date(a.createdAt);
-                          const dateB = new Date(b.createdAt);
+                          const dateA = new Date(a.created_at);
+                          const dateB = new Date(b.created_at);
                           return dateB - dateA;
                         }).map((job, i) => (
                           <JobCard onClick={() => {
-                            dispatch(getSingleJob(job._id))
+                            dispatch(getSingleJob(job.job_id))
                           }}
                             key={i}
                             job={job} />

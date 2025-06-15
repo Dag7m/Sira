@@ -31,7 +31,7 @@ export const AppliedJobCard = ({id, job, time }) => {
 
             <div className='flex gap-5 relative'>
                 <div className='flex justify-center items-center '>
-                    <img src={job.companyLogo.url} className='md:w-[5em] h-16 w-16  md:h-20' alt="" />
+                    <img src={job.company_logo_url} className='md:w-[5em] h-16 w-16  md:h-20' alt="" />
                 </div>
                 <div className='flex flex-col '>
 
@@ -40,10 +40,10 @@ export const AppliedJobCard = ({id, job, time }) => {
                     </div>
                     <div className='flex justify-between gap-2 '>
                         <div className='flex flex-col gap-1'>
-                            <p className='text-sm'>{job.companyName}</p>
-                            <p className='text-sm'>{job.exp}</p>
-                           {!isMobile && <p className='text-sm flex '>{job.description.slice(0, 90)}...</p>}
-                            <p className='text-sm flex md:hidden'>{job.description.slice(0, 25)}...</p>
+                            <p className='text-sm'>{job.company_name}</p>
+                            <p className='text-sm'>{job.experiance}</p>
+                           {/* {!isMobile && <p className='text-sm flex '>{job.description.slice(0, 90)}...</p>} */}
+                            {/* <p className='text-sm flex md:hidden'>{job.description.slice(0, 25)}...</p> */}
                         </div>
                         <div className='absolute md:right-3 right-0 md:pt-0 md:top-3 top-18  flex flex-col gap-3' >
                             <Link to={`/Application/Details/${id}`} className='blueCol font-semibold md:text-sm 

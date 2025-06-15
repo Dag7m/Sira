@@ -85,7 +85,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/details/:id' element={<JobDetails />} />
 
-        <Route element={<ProtectedRoute isAllowed={['applicant', 'admin'].includes(localStorage.getItem('role'))} />}>
+        <Route element={<ProtectedRoute isAllowed={['job_seeker', 'admin'].includes(localStorage.getItem('role'))} />}>
           <Route path='/profile' element={<MyProfile />} />
           <Route path='/applied' element={<AppliedJobs />} />
           <Route path='/saved' element={<SavedJobs />} />

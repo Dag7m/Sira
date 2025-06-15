@@ -39,7 +39,7 @@ export const Navbar = () => {
             <div className='text-white z-20 fixed min-w-full bg-gray-950'>
               {!isMobile &&  <ul className='sm:flex  justify-center items-center gap-24 pt-4 pb-3 font-semibold text-xl'>
                     <Link to="/" className='flex fixed left-24 justify-center items-center titleT'>
-                        <MdOutlineBusinessCenter size={19} />  JOBLANE
+                        <MdOutlineBusinessCenter size={30} />  ስራ
                     </Link>
 
                     <Link to="/" className='cool-link'>Home</Link>
@@ -49,10 +49,11 @@ export const Navbar = () => {
 
                     {isLogin ? (
                         <Menu shadow="md" width={200}>
-                            <Menu.Target>
-                                <Avatar className='cursor-pointer fixed right-32' radius="xl" src={me.avatar.url} alt="it's me" />
-                            </Menu.Target>
-
+<Menu.Target>
+  <div className="cursor-pointer fixed right-32 font-semibold text-base">
+    {me.name} 
+  </div>
+</Menu.Target>
                             <Menu.Dropdown>
                                 <Link to="/profile"><Menu.Item icon={<FaUserCircle size={14} />}>My Profile</Menu.Item></Link>
                                 {me.role === "admin" && <Link to="/admin/dashboard"><Menu.Item icon={<MdOutlineDashboard size={14} />}>Dashboard</Menu.Item></Link>}
@@ -72,15 +73,15 @@ export const Navbar = () => {
 
                 <div className='py-3 px-3 md:hidden justify-between items-center flex'>
                     <Link to="/" className='text-lg titleT flex justify-center items-center gap-1'>
-                        <MdOutlineBusinessCenter size={19} /> JOBLANE
+                        <MdOutlineBusinessCenter size={19} /> ስራ
                     </Link>
                     <div className='flex justify-center items-center'>
                         <div className='pr-12'>
                             {isLogin ? (
                                 <Menu shadow="md" width={200}>
-                                    <Menu.Target>
+                                    {/* <Menu.Target>
                                         <Avatar size={28} className='cursor-pointer' radius="xl" src={me.avatar.url} alt="it's me" />
-                                    </Menu.Target>
+                                    </Menu.Target> */}
 
                                     <Menu.Dropdown>
                                         <Link to="/profile"><Menu.Item icon={<FaUserCircle size={14} />}>My Profile</Menu.Item></Link>

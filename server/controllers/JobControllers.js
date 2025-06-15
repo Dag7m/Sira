@@ -1,36 +1,51 @@
 const pool = require('../config/database');
 const cloudinary = require('cloudinary');
+const { initializeDatabase } = require('../config/database');
+
+let pool; // Pool will be initialized once
+
+// Initialize the pool when the module is loaded
+(async () => {
+  pool = await initializeDatabase();
+})();
 
 exports.createJob = async (req, res) => {
     try {
-        const { title, description, companyName, location, logo, skillsRequired, experience, salary, category, employmentType } = req.body;
-
+        const { title, description, companyName, location, logo, skillsRequired, experience, salary, category , employmentType } = req.body;
+const company_id = parseInt(companyName);
+const category_id = parseInt(category);
         const myCloud = await cloudinary.v2.uploader.upload(logo, {
             folder: 'logo',
             crop: "scale",
         });
-
+        const categoryId = parseInt(req.body.category_id);
         const [result] = await pool.query(
             `INSERT INTO jobs 
-            (title, description, company_name, company_logo_public_id, company_logo_url, 
-             location, skills_required, experience, category, salary, employment_type, posted_by)
+            (title, description, company_id, company_logo_public_id, company_logo_url, 
+             location, skills_required, experience, category_id, salary, employment_type, posted_by)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 title,
                 description,
-                companyName,
+                company_id,
                 myCloud.public_id,
                 myCloud.secure_url,
                 location,
                 skillsRequired,
                 experience,
-                category,
+                category_id,
                 salary,
                 employmentType,
                 req.user.user_id
             ]
         );
+ const jobId = result.insertId;
 
+        // Insert into job_category_mappings
+        await pool.query(
+            `INSERT INTO job_category_mappings (job_id, category_id) VALUES (?, ?)`,
+            [jobId, category_id]
+        );
         const [newJob] = await pool.query(
             `SELECT * FROM jobs WHERE job_id = ?`,
             [result.insertId]
@@ -52,7 +67,7 @@ exports.createJob = async (req, res) => {
 
 exports.allJobs = async (req, res) => {
     try {
-        const [jobs] = await pool.query(
+        const [Jobs] = await pool.query(
             `SELECT j.*, u.name as posted_by_name, u.email as posted_by_email 
              FROM jobs j
              JOIN users u ON j.posted_by = u.user_id`
@@ -60,7 +75,7 @@ exports.allJobs = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            jobs
+            Jobs
         });
 
     } catch (err) {

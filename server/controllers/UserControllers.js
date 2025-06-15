@@ -16,39 +16,21 @@ exports.register = async (req, res) => {
       throw new Error('Database pool is not initialized');
     }
 
-    const { name, email, password, avatar, skills, resume } = req.body;
-
-    // Upload avatar to Cloudinary
-    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-      folder: 'avatar',
-      crop: 'scale',
-    });
-
-    // Upload resume to Cloudinary
-    const myCloud2 = await cloudinary.v2.uploader.upload(resume, {
-      folder: 'resume',
-      crop: 'fit',
-    });
+    const { name, email, password,role } = req.body;
 
     // Hash the password
     const hashPass = await bcrypt.hash(password, 10);
 
-    // Convert skills array to a string for MySQL storage
-    const skillsString = JSON.stringify(skills);
 
     // MySQL query to insert user
     const [result] = await pool.query(
-      `INSERT INTO users (name, email, password, avatar_public_id, avatar_url, skills, resume_public_id, resume_url) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO users (name, email, password,role) 
+       VALUES (?, ?, ?, ?)`,
       [
         name,
         email,
         hashPass,
-        myCloud.public_id,
-        myCloud.secure_url,
-        skillsString,
-        myCloud2.public_id,
-        myCloud2.secure_url,
+        role,
       ]
     );
 
@@ -65,7 +47,6 @@ exports.register = async (req, res) => {
     }
 
     const user = userRows[0];
-    user.skills = JSON.parse(user.skills || '[]');
 
     // Create token
     const token = createToken(user.user_id, user.email);
@@ -93,7 +74,6 @@ exports.register = async (req, res) => {
   }
 };
 
-// ... (rest of your controller functions remain the same, but ensure they use the `pool` variable)
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -109,7 +89,6 @@ exports.login = async (req, res) => {
                 message: "User does not exist"
             });
         }
-
         const user = userRows[0];
         const isMatch = await bcrypt.compare(password, user.password);
 
@@ -120,10 +99,10 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Parse skills back to array for response
-        user.skills = JSON.parse(user.skills || '[]');
+
 
         const token = createToken(user.user_id, user.email);
+        console.log("Generated Token:", token);
 
         res.status(200).json({
             success: true,
@@ -141,10 +120,11 @@ exports.login = async (req, res) => {
 };
 
 exports.isLogin = async (req, res) => {
+
     try {
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         res.status(200).json({
@@ -164,7 +144,8 @@ exports.me = async (req, res) => {
     try {
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
+  
         );
 
         if (userRows.length === 0) {
@@ -174,12 +155,9 @@ exports.me = async (req, res) => {
             });
         }
 
-        const user = userRows[0];
-        user.skills = JSON.parse(user.skills || '[]');
-
         res.status(200).json({
             success: true,
-            user
+            user: userRows[0]
         });
 
     } catch (err) {
@@ -197,7 +175,7 @@ exports.changePassword = async (req, res) => {
         // Get user from database
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         if (userRows.length === 0) {
@@ -236,7 +214,7 @@ exports.changePassword = async (req, res) => {
         // Update password in database
         await pool.query(
             'UPDATE users SET password = ? WHERE user_id = ?',
-            [hashPass, req.user.id]
+            [hashPass, req.user.user_id]
         );
 
         res.status(200).json({
@@ -259,7 +237,7 @@ exports.updateProfile = async (req, res) => {
         // Get current user data
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         if (userRows.length === 0) {
@@ -305,7 +283,7 @@ exports.updateProfile = async (req, res) => {
                 myCloud1.secure_url,
                 myCloud2.public_id,
                 myCloud2.secure_url,
-                req.user.id
+                req.user.user_id
             ]
         );
 
@@ -327,7 +305,7 @@ exports.deleteAccount = async (req, res) => {
         // Get user from database
         const [userRows] = await pool.query(
             'SELECT * FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         if (userRows.length === 0) {
@@ -354,7 +332,7 @@ exports.deleteAccount = async (req, res) => {
         // Delete user from database
         await pool.query(
             'DELETE FROM users WHERE user_id = ?',
-            [req.user.id]
+            [req.user.user_id]
         );
 
         res.status(200).json({

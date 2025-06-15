@@ -19,20 +19,20 @@ export const EditProfile = () => {
 
   const [name, setName] = useState(me.name);
   const [email, setEmail] = useState(me.email);
-  const [skills, setSkills] = useState(me.skills);
+/*   const [skills, setSkills] = useState(me.skills);
 
   const [avatar, setAvatar] = useState("")
   const [avatarName, setAvatarName] = useState("")
 
   const [resume, setResume] = useState("")
-  const [resumeName, setResumeName] = useState("")
+  const [resumeName, setResumeName] = useState("") */
 
 
   
 
 
 
-  const avatarChange = (e) => {
+/*   const avatarChange = (e) => {
     if (e.target.name === "avatar") {
       const reader = new FileReader();
       reader.onload = () => {
@@ -61,21 +61,21 @@ export const EditProfile = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   }
-
+ */
 
     const editHandler = (e) => {
         e.preventDefault()
-        let skillArr = skills
+        /* let skillArr = skills
         if(skills.constructor !== Array){
              skillArr = skills.split(",")
         }
-
+ */
          const data = { 
              newName: name, 
              newEmail: email, 
-             newAvatar: avatar, 
+        /*      newAvatar: avatar, 
              newResume: resume, 
-             newSkills: skillArr  
+             newSkills: skillArr  */ 
          }
 
          dispatch(updateProfile(data))
@@ -87,7 +87,7 @@ export const EditProfile = () => {
         dispatch(ME())
         setName(me.name)
         setEmail(me.email)
-        setSkills(me.skills)
+  /*       setSkills(me.skills) */
     },[dispatch])
 
     return (
@@ -128,7 +128,7 @@ export const EditProfile = () => {
 
 
                                     {/* Profile */}
-                                    <div>
+                                  {/*   <div>
                                         <div className='bg-white flex justify-center items-center'>
                                             <div className='text-gray-600 px-2'>
                                                 <CgProfile size={20} />
@@ -144,10 +144,11 @@ export const EditProfile = () => {
 
                                         </div>
                                         <p className='bg-gray-950 text-white text-xs'>Please select Image file</p>
-                                    </div>
+                                    </div> */}
 
-
+ 
                                     {/* Resume */}
+                                    {/*
                                     <div>
                                         <div className='bg-white flex justify-center items-center'>
                                             <div className='text-gray-600 px-2'>
@@ -161,16 +162,16 @@ export const EditProfile = () => {
                                                 placeholder='Resume' id='resume' name='resume' accept="image/*" type="file" className='outline-none hidden w-full text-black px-1 pr-3 py-2' />
                                         </div>
                                         <p className='bg-gray-950 text-white text-xs'>Please select Image file</p>
-                                    </div>
+                                    </div> */}
 
                                     {/* Skills */}
-                                    <div className='bg-white flex justify-center items-center'>
+                            {/*         <div className='bg-white flex justify-center items-center'>
                                         <div className='text-gray-600 md:pb-12 pb-8 px-2'>
                                             <MdOutlineFeaturedPlayList size={20} />
                                         </div>
                                         <textarea value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
                                     </div>
-
+ */}
 
 
 

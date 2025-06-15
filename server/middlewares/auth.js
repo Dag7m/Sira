@@ -1,57 +1,40 @@
-const jwt = require('jsonwebtoken')
-const User = require('../models/UserModel')
+const jwt = require('jsonwebtoken');
+const { pool } = require('../config/database');
+const util = require('util'); // to convert callback to promise
 
+// Promisify jwt.verify so we can use async/await
+const verifyToken = util.promisify(jwt.verify);
 
+// Create token
 exports.createToken = (id, email) => {
-    const token = jwt.sign(
-        {
-            id, email
-        }, process.env.SECRET,
-        {
-            expiresIn: '5d'
-        }
-    )
+    return jwt.sign({ id, email }, process.env.SECRET, { expiresIn: '5d' });
+};
 
-    return token ;
-}
-
-
-
-exports.isAuthenticated = (req, res, next) => {
-    try{    
-        const token = req.headers.authorization?.split(' ')[1]
-               
-        
-        if(!token){
-            return res.status(401).json({
-                success: false,
-                isLogin: false,
-                message: "Missing Token"
-            })
-        }
-
-        jwt.verify(token, process.env.SECRET, async(err, user)=>{
-            if(err){
-                return res.status(400).json({
-                    success: false,
-                    isLogin: false,
-                    message: err.message
-                })
-            }
-            req.user = await User.findById(user.id)
-            next()
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
+// Middleware: isAuthenticated
+exports.isAuthenticated = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ success: false, isLogin: false, message: "Missing Token" });
     }
-}
 
+    const user = await verifyToken(token, process.env.SECRET);
+    
+    const pool = req.app.locals.db; // ✅ get pool from app context
 
+    const [rows] = await pool.execute('SELECT * FROM users WHERE user_id = ?', [user.id]);
 
+    if (rows.length === 0) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    req.user = rows[0];
+    next();
+  } catch (err) {
+    console.error("Auth error:", err.message);
+    res.status(401).json({ success: false, message: err.message });
+  }
+};
 
 exports.authorizationRoles = (...roles) => {
     return (req, res, next) => {
@@ -61,7 +44,6 @@ exports.authorizationRoles = (...roles) => {
                 message: `Role ${req.user.role} is not allowed to access this resource`
             });
         }
-
         next();
     };
 };

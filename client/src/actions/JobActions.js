@@ -32,8 +32,8 @@ export const getAllJobs = () => async (dispatch) => {
         dispatch(allJobsRequest()) ;
 
         const {data} = await axios.get("http://localhost:5000/api/v1/jobs") ;
-
         dispatch(allJobsSuccess(data.Jobs)) ;
+
 
     }catch(err){
         dispatch(allJobsFail(err.response.data.message))   
@@ -70,7 +70,7 @@ export const saveJob = (id) => async (dispatch) => {
         const {data} = await axios.get(`http://localhost:5000/api/v1/saveJob/${id}`,config) ;
 
         dispatch(me())
-        dispatch(jobSaveSuccess()) ;
+        dispatch(jobSaveSuccess(id)) ;
         toast.success(data.message)   
 
     }catch(err){
@@ -93,7 +93,7 @@ export const getSavedJobs = () => async (dispatch) => {
 
         const {data} = await axios.get("http://localhost:5000/api/v1/getSavedJobs",config) ;
 
-        dispatch(getSavedJobsSuccess(data))
+        dispatch(getSavedJobsSuccess(data.savedJobs))
 
     }catch(err){
         dispatch(getSavedJobsFail(err.response.data.message))
