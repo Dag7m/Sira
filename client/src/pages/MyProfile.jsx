@@ -61,11 +61,6 @@ useEffect(() => {
 
     return `${day}-${month}-${year}`;
   }
-
-  
-
-
-  
   return (
     <>
 
@@ -114,9 +109,6 @@ useEffect(() => {
 
 
                 </div>
-
-
-
                 <div className='  md:w-1/2 w-full md:px-0 px-4 pb-20 md:pt-4 pt-8'>
                   <div className='flex flex-col md:gap-5 gap-6'>
                     <div>
@@ -137,11 +129,16 @@ useEffect(() => {
                         me.skills.map((skill, i) => (
                           <span key={i} className='bg-yellow-500 text-black  text-sm px-2 py-1  font-bold '>{skill}</span>
                         ))
+<<<<<<< Updated upstream
                       }</div> 
                     </div>*/}
 
 
 
+=======
+                      }</div> */}
+                    </div>
+>>>>>>> Stashed changes
                     <div className='flex md:flex-row flex-col md:gap-8 pt-4 gap-3'>
                       <ul className='flex flex-col gap-4'>
 {/* 
@@ -152,7 +149,6 @@ useEffect(() => {
                         <li className=' '>
                           <Link to="/saved" ><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Saved Jobs</button></Link>
                         </li>
-
                       </ul>
                       <ul className='flex flex-col gap-4'>
                         <li className=' '>
@@ -160,11 +156,13 @@ useEffect(() => {
                         </li>
                         <li className=' '><Link to="/deleteAccount"><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Delete Account</button></Link></li>
                       </ul>
+<<<<<<< Updated upstream
                   <div className='flex justify-center items-center'>
                     <Link to="/editProfile" className='blueCol px-10 py-2 font-semibold'>Edit Profile</Link>
                   </div>
+=======
+>>>>>>> Stashed changes
                     </div>
-
                   </div>
                 </div>
                 <Modal opened={opened} onClose={close} title="Resume">
@@ -173,19 +171,10 @@ useEffect(() => {
                   </div> */}
                  
                 </Modal>
-               
-
               </div>
 
             </>
-
-
-
-
-
         }
-
-
       </div>
 
     </>
