@@ -88,16 +88,16 @@ export const ViewAllUsersAdmin = () => {
               </thead>
               <tbody>
                 {
-                  allUsers && allUsers.filter(user => user._id)
+                  allUsers && allUsers.filter(user => user.user_id)
                     .sort((a, b) => {
-                      const dateA = new Date(a.createdAt);
-                      const dateB = new Date(b.createdAt);
+                      const dateA = new Date(a.created_at);
+                      const dateB = new Date(b.created_at);
                       return dateB - dateA;
                     }).map((user, i) => (
 
                       <tr key={i} className=" border-b hover:bg-gray-900 bg-gray-950 border-gray-700">
                         <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap text-white">
-                          {user._id}
+                          {user.user_id}
                         </th>
                         <td className="px-6 py-4">
                           {user.name}
@@ -106,14 +106,14 @@ export const ViewAllUsersAdmin = () => {
                           {user.role}
                         </td>
                         <td className="px-6 py-4">
-                          {convertDateFormat(user.createdAt.substr(0, 10))}
+                          {convertDateFormat(user.created_at.substr(0, 10))}
                         </td>
                         <td className="px-6 flex gap-4 md:pt-4 pt-6 py-4">
-                          <Link to={`/admin/user/role/${user._id}`} className='text-blue-500 hover:text-blue-400 cursor-pointer flex justify-center items-center '>
+                          <Link to={`/admin/user/role/${user.user_id}`} className='text-blue-500 hover:text-blue-400 cursor-pointer flex justify-center items-center '>
                             <MdOutlineModeEditOutline  size={20} />
                           </Link>
 
-                          <span onClick={()=>deleteUserHandler(user._id)} className='text-red-500 hover:text-red-400 cursor-pointer flex justify-center items-center '>
+                          <span onClick={()=>deleteUserHandler(user.user_id)} className='text-red-500 hover:text-red-400 cursor-pointer flex justify-center items-center '>
                             <AiOutlineDelete size={20} />
                           </span>
                         </td>

@@ -28,15 +28,15 @@ export const EditJobAdmin = () => {
 
     const [title, setTitle] = useState(jobData.title);
     const [description, setDescription] = useState(jobData.description);
-    const [companyName, setCompanyName] = useState(jobData.companyName);
+    const [company_name, setCompanyName] = useState(jobData.company_name);
     const [location, setLocation] = useState(jobData.location);
-    const [skillsRequired, setSkillsRequired] = useState(jobData.skillsRequired);
+    const [skills_required, setSkillsRequired] = useState(jobData.skills_required);
     const [experience, setExperience] = useState(jobData.experience);
     const [salary, setSalary] = useState(jobData.salary);
-    const [category, setCategory] = useState(jobData.category);
-    const [employmentType, setEmploymentType] = useState(jobData.employmentType);
+    // const [category, setCategory] = useState(jobData.category);
+    const [employmentType, setEmploymentType] = useState(jobData.employment_type);
 
-    const [logo, setLogo] = useState(jobData.companyLogo.url);
+    const [logo, setLogo] = useState(jobData.company_logo_url);
     const [logoName, setLogoName] = useState("Select New Logo");
 
 
@@ -73,14 +73,14 @@ export const EditJobAdmin = () => {
     useEffect(()=>{
         setTitle(jobData.title)
         setDescription(jobData.description)
-        setCompanyName(jobData.companyName)
+        setCompanyName(jobData.company_name)
         setLocation(jobData.location)
-        setSkillsRequired(jobData.skillsRequired)
+        setSkillsRequired(jobData.skills_required)
         setExperience(jobData.experience)
         setSalary(jobData.salary)
         setCategory(jobData.category)
-        setEmploymentType(jobData.employmentType)
-        setLogo(jobData.companyLogo.url)
+        setEmploymentType(jobData.employment_type)
+        setLogo(jobData.company_logo_url)
        
     },[jobData])
 
@@ -97,14 +97,14 @@ export const EditJobAdmin = () => {
         else{
             const updatedData = {
                 title,
-                companyName,
+                company_name,
                 location,
-                skillsRequired:skillsArr,
+                skills_required,
                 experience,
                 salary,
                 category,
-                employmentType,
-                companyLogo:logo,
+                employment_type,
+                company_logo_url:logo,
                 description
             }
     
@@ -157,7 +157,7 @@ export const EditJobAdmin = () => {
                                                     <BiBuilding size={20} />
                                                 </div>
                                                 <input
-                                                    value={companyName} onChange={(e) => setCompanyName(e.target.value)}
+                                                    value={company_name} onChange={(e) => setCompanyName(e.target.value)}
                                                     required placeholder='Company Name' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
                                             </div>
 
@@ -243,13 +243,13 @@ export const EditJobAdmin = () => {
                                                     <MdWorkspacesOutline size={20} />
                                                 </div>
                                                 <textarea
-                                                    value={skillsRequired} onChange={(e) => setSkillsRequired(e.target.value)}
+                                                    value={skills_required} onChange={(e) => setSkillsRequired(e.target.value)}
                                                     placeholder='Required Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
                                             </div>
 
                                         </div>
                                         <div className='flex gap-3'>
-                                            {/* Category */}
+                                          {/*   {/* Category */}
                                             <div className='bg-white flex justify-center items-center'>
 
 
@@ -262,7 +262,7 @@ export const EditJobAdmin = () => {
                                                     <option value="Sales">Sales</option>
                                                     <option value="Legal">Legal</option>
                                                 </select>
-                                            </div>
+                                            </div> 
 
 
                                             {/* Employment Type */}
@@ -338,7 +338,7 @@ export const EditJobAdmin = () => {
                                                 <BiBuilding size={20} />
                                             </div>
                                             <input
-                                                value={companyName} onChange={(e) => setCompanyName(e.target.value)}
+                                                value={company_name} onChange={(e) => setCompanyName(e.target.value)}
                                                 required placeholder='Company Name' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
                                         </div>
 
@@ -384,7 +384,7 @@ export const EditJobAdmin = () => {
                                                 <MdWorkspacesOutline size={20} />
                                             </div>
                                             <textarea
-                                                value={skillsRequired} onChange={(e) => setSkillsRequired(e.target.value)}
+                                                value={skills_required} onChange={(e) => setSkillsRequired(e.target.value)}
                                                 placeholder='Required Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
                                         </div>
 

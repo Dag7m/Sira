@@ -86,37 +86,37 @@ export const ViewAllAppli = () => {
                 </tr>
               </thead>
               <tbody>
-                {allApplications && allApplications.filter(user => user._id)
+                {allApplications && allApplications.filter(user => user.user_id)
                .sort((a, b) => {
-                 const dateA = new Date(a.createdAt);
-                 const dateB = new Date(b.createdAt);
+                 const dateA = new Date(a.created_at);
+                 const dateB = new Date(b.created_at);
                  return dateB - dateA;
                }).map((app,i)=>(
                 <tr key={i} className=" border-b hover:bg-gray-900 bg-gray-950 border-gray-700 text-white">
                   <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">
-                    {app._id}
+                    {app.application_id}
                   </th>
                   <td className="px-6 py-4">
-                    {app.job.title}
+                    {app.job_title}
                   </td>
                   <td className="px-6 py-4">
                     {app.applicant.name}
                   </td>
-                  <td className={`px-6 py-4 ${
+{/*                   <td className={`px-6 py-4 ${
                     app.status === "pending" ? "text-blue-500" : app.status === "rejected" ? "text-red-500" : "text-green-500"                
                 } `}>
                     {app.status} 
-                  </td>
+                  </td> */}
                   <td className="px-6 py-4">
-                    {convertDateFormat(app.createdAt.substr(0,10))}
+                    {convertDateFormat(app.created_at.substr(0,10))}
                   </td>
                   <td className="px-6 flex gap-4 py-4">
-                    <Link to={`/admin/update/application/${app._id}`} className='text-blue-500 hover:text-blue-400 cursor-pointer'>
+                    <Link to={`/admin/update/application/${app.application_id}`} className='text-blue-500 hover:text-blue-400 cursor-pointer'>
                       <MdOutlineModeEditOutline  size={20} />
                     </Link>
 
                     <div className='text-red-500 hover:text-red-400 cursor-pointer'>
-                      <AiOutlineDelete onClick={()=> deleteApplication(app._id)} size={20} />
+                      <AiOutlineDelete onClick={()=> deleteApplication(app.application_id)} size={20} />
                     </div>
                   </td>
                 </tr>))}

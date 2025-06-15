@@ -52,11 +52,11 @@ export const Sidebar = ({sideTog}) => {
                             <BsBriefcase size={20} />View All Jobs
                         </Link>
                     </div>
-                    <div className='flex justify-center gap-2 items-center'>
+{/*                     <div className='flex justify-center gap-2 items-center'>
                         <Link  to="/admin/allApplications" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
                             <MdOutlineFeaturedPlayList size={20} />
 
-                            View All Applications </Link></div>
+                            View All Applications </Link></div> */}
 
                     <div className='flex justify-center gap-2 items-center'>
 
