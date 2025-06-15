@@ -45,8 +45,12 @@ export const SaveJobCard = ({ job }) => {
                         <div className='flex flex-col gap-1'>
                             <p className='text-sm'>{job.company_name}</p>
                             <p className='text-sm'>{job.exp}</p>
-                         {!isMobile && <p className='text-sm md:flex '>{job.description.slice(0, 90)}...</p>}
-                            <p className='text-sm flex md:hidden'>{job.description.slice(0, 25)}...</p>
+                       {job.description && !isMobile && (
+  <p className='text-sm md:flex '>{job.description.slice(0, 90)}...</p>
+)}
+                         {job.description && isMobile && (
+  <p className='text-sm flex md:hidden'>{job.description.slice(0, 25)}...</p>
+)}
                         </div>
                         <div className='absolute md:right-3 right-0 md:pt-0 top-7 text-sm flex flex-col gap-6' >
                             <Link to={`/details/${job.job_id}`} className='blueCol font-semibold md:text-sm text-xs px-3 py-1 text-center ' >Apply</Link>
@@ -62,10 +66,12 @@ export const SaveJobCard = ({ job }) => {
             </div>
 
             <div className='flex md:gap-8 gap-3 md:text-sm text-xs'>
-                <span>{convertDateFormat(job.created_at.substr(0, 10))}</span>
-                <span>{job.employment_type}</span>
-                <span>{job.location}</span>
-            </div>
+  <span>
+    {job.created_at ? convertDateFormat(job.created_at.substr(0, 10)) : 'N/A'}
+  </span>
+  <span>{job.employment_type || 'N/A'}</span>
+  <span>{job.location || 'N/A'}</span>
+</div>
 
         </div>
     )

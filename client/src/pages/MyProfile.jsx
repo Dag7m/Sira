@@ -130,7 +130,8 @@ useEffect(() => {
         <p className="pt-2">{exp.description}</p>
         <button
           onClick={() => handleDeleteExperience(exp.id)}
-          className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white text-sm px-2 py-1 rounded"
+          className="absolute top-2 right-2 bg-blue-500 hover:bg-blue-600 text-white text-[10px] px-1 py-[2px] rounded"
+
         >
           Delete
         </button>
@@ -149,7 +150,8 @@ useEffect(() => {
         <p>{edu.start_year} - {edu.end_year}</p>
         <button
           onClick={() => handleDeleteEducation(edu.id)}
-          className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white text-sm px-2 py-1 rounded"
+          className="absolute top-2 right-2 bg-blue-500 hover:bg-blue-600 text-white text-[10px] px-1 py-[2px] rounded"
+
         >
           Delete
         </button>
