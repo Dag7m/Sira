@@ -9,7 +9,7 @@ import { About } from './pages/About'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { MyProfile } from './pages/MyProfile'
-import { AppliedJobs } from './pages/AppliedJobs'
+import AppliedJobs from './pages/AppliedJobs';
 import { SavedJobs } from './pages/SavedJobs'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'

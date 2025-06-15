@@ -33,7 +33,13 @@ exports.register = async (req, res) => {
         role,
       ]
     );
-
+ const userId = result.insertId;
+  if (role === 'admin') {
+      await pool.query(
+        `INSERT INTO admins (user_id) VALUES (?)`,
+        [userId]
+      );
+    }
     // Get the inserted user
     const [userRows] = await pool.query('SELECT * FROM users WHERE user_id = ?', [
       result.insertId,
@@ -325,9 +331,6 @@ exports.deleteAccount = async (req, res) => {
             });
         }
 
-        // Delete files from Cloudinary
-        await cloudinary.v2.uploader.destroy(user.avatar_public_id);
-        await cloudinary.v2.uploader.destroy(user.resume_public_id);
 
         // Delete user from database
         await pool.query(

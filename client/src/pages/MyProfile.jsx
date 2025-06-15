@@ -7,12 +7,42 @@ import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button, Group } from '@mantine/core';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-
-
+import AddEducationForm from './AddEducationForm';
+import AddExperienceForm from './AddExperienceForm';
 export const MyProfile = () => {
 const [educations, setEducations] = useState([]);
 const [experiences, setExperiences] = useState([]);
-useEffect(() => {
+const [eduModalOpen, setEduModalOpen] = useState(false);
+const [expModalOpen, setexpModalOpen] = useState(false);
+  const handleDeleteExperience = async (id) => {
+  try {
+    const token = localStorage.getItem('userToken');
+    await axios.delete(`http://localhost:5000/api/profile/work-experience/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // Update UI
+    setExperiences(experiences.filter(exp => exp.id !== id));
+  } catch (error) {
+    console.error("Failed to delete experience:", error);
+  }
+};
+
+const handleDeleteEducation = async (id) => {
+  try {
+    const token = localStorage.getItem('userToken');
+    await axios.delete(`http://localhost:5000/api/profile/education/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // Update UI
+    setEducations(educations.filter(edu => edu.id !== id));
+  } catch (error) {
+    console.error("Failed to delete education:", error);
+  }
+};
   const fetchData = async () => {
     try {
       const token = localStorage.getItem('userToken');
@@ -35,6 +65,10 @@ useEffect(() => {
       console.error("Failed to fetch profile data:", error);
     }
   };
+useEffect(() => {
+
+
+
 
   fetchData();
 }, []);
@@ -90,10 +124,16 @@ useEffect(() => {
   <h2 className="text-2xl font-semibold underline mb-4">Work Experience</h2>
   {experiences.length === 0 ? <p>No experiences added.</p> : (
     experiences.map(exp => (
-      <div key={exp.id} className="bg-gray-800 p-4 rounded-lg mb-4">
+      <div key={exp.id} className="bg-gray-800 p-4 rounded-lg mb-4 relative">
         <h3 className="text-xl font-bold">{exp.job_title} @ {exp.company_name}</h3>
         <p className="text-sm">{formatDate(exp.start_date)} - {formatDate(exp.end_date) || 'Present'}</p>
         <p className="pt-2">{exp.description}</p>
+        <button
+          onClick={() => handleDeleteExperience(exp.id)}
+          className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white text-sm px-2 py-1 rounded"
+        >
+          Delete
+        </button>
       </div>
     ))
   )}
@@ -103,14 +143,21 @@ useEffect(() => {
   <h2 className="text-2xl font-semibold underline mb-4">Education</h2>
   {educations.length === 0 ? <p>No education records found.</p> : (
     educations.map(edu => (
-      <div key={edu.id} className="bg-gray-800 p-4 rounded-lg mb-4">
+      <div key={edu.id} className="bg-gray-800 p-4 rounded-lg mb-4 relative">
         <h3 className="text-xl font-bold">{edu.degree} in {edu.field_of_study}</h3>
         <p>{edu.institution}</p>
         <p>{edu.start_year} - {edu.end_year}</p>
+        <button
+          onClick={() => handleDeleteEducation(edu.id)}
+          className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white text-sm px-2 py-1 rounded"
+        >
+          Delete
+        </button>
       </div>
     ))
   )}
 </div>
+
 
 
                 </div>
@@ -143,6 +190,22 @@ useEffect(() => {
 
 
                     <div className='flex md:flex-row flex-col md:gap-8 pt-4 gap-3'>
+                      <div className='flex justify-center items-center'>      
+                  <Modal opened={eduModalOpen} onClose={() => setEduModalOpen(false)} title="Add Education">
+  <AddEducationForm onAdded={fetchData} />
+</Modal>
+<ul className='flex flex-col gap-4'>
+ <li className=' '>
+<button onClick={() => setEduModalOpen(true)} className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Add Education</button>
+</li>
+ <Modal opened={expModalOpen} onClose={() => setexpModalOpen(false)} title="Add Experience">
+  <AddExperienceForm onAdded={fetchData} />
+</Modal>
+ <li className=' '>
+<button onClick={() => setexpModalOpen(true)} className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Add Experience</button>
+</li>
+</ul>
+</div>
                       <ul className='flex flex-col gap-4'>
 {/* 
                         <li className=' '> <Link  ><button onClick={open} className='blueCol w-2/3 md:w-full  font-medium px-6 py-1'>My Resume</button></Link> </li> */}
@@ -163,9 +226,11 @@ useEffect(() => {
                   <div className='flex justify-center items-center'>
                     <Link to="/editProfile" className='blueCol px-10 py-2 font-semibold'>Edit Profile</Link>
                   </div>
+                  
                     </div>
 
                   </div>
+                
                 </div>
                 <Modal opened={opened} onClose={close} title="Resume">
 {/*                   <div>
