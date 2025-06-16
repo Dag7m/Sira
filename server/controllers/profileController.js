@@ -87,3 +87,63 @@ exports.addExperience = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+
+// CREATE PROFILE
+exports.createProfile = async (req, res) => {
+  const { bio, skills, resume_url } = req.body;
+  const userId = req.user.user_id;
+
+  try {
+    const [existing] = await pool.query('SELECT * FROM Profiles WHERE user_id = ?', [userId]);
+    if (existing.length > 0) {
+      return res.status(400).json({ message: 'Profile already exists' });
+    }
+
+    await pool.query(
+      'INSERT INTO Profiles (user_id, bio, skills, resume_url) VALUES (?, ?, ?, ?)',
+      [userId, bio, skills, resume_url]
+    );
+
+    res.status(201).json({ message: 'Profile created' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// GET PROFILE
+exports.getMyProfile = async (req, res) => {
+  const userId = req.user.user_id;
+
+  try {
+    const [results] = await pool.query('SELECT * FROM Profiles WHERE user_id = ?', [userId]);
+
+    if (results.length === 0) {
+      return res.status(200).json(null); // No profile yet
+    }
+
+    res.json(results[0]);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch profile' });
+  }
+};
+
+// UPDATE PROFILE
+exports.updateProfile = async (req, res) => {
+  const userId = req.user.user_id;
+  const fields = req.body;
+
+  if (Object.keys(fields).length === 0) {
+    return res.status(400).json({ message: 'No fields provided to update' });
+  }
+
+  const updates = Object.keys(fields).map(field => `${field} = ?`).join(', ');
+  const values = Object.values(fields);
+
+  try {
+    await pool.query(`UPDATE Profiles SET ${updates} WHERE user_id = ?`, [...values, userId]);
+    res.json({ message: 'Profile updated' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

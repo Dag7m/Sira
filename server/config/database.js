@@ -31,16 +31,17 @@ const createTables = async (pool) => {
     `);
 
         await connection.query(`
-    CREATE TABLE IF NOT EXISTS Profiles (
-  id INT PRIMARY KEY AUTO_INCREMENT,
+ CREATE TABLE IF NOT EXISTS Profiles (
+  profile_id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   bio TEXT,
+  skills TEXT,
   resume_url VARCHAR(255),
-  skills JSON,
-  avatar VARCHAR(255),
-  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-  UNIQUE (user_id)
-)
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+);
+
      `);
             await connection.query(`
   CREATE TABLE IF NOT EXISTS Educations (
@@ -151,12 +152,7 @@ const createTables = async (pool) => {
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) `);
-  await connection.query(`
-CREATE TABLE IF NOT EXISTS admins (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
-)`);
+
 
 
 

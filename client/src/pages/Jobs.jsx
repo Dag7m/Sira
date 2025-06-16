@@ -93,7 +93,7 @@ export const Jobs = () => {
 
   }
 
-  const leftFilter = (jobsList) => {
+ /*  const leftFilter = (jobsList) => {
     if (category == "" && salary == 0) {
       setJobs(allJobs)
       return
@@ -102,7 +102,7 @@ export const Jobs = () => {
       item.category.toLowerCase() === category.toLowerCase() && parseInt(item.salary) >= salary
     ))
     setJobs(leftFilArr)
-  }
+  } */
 
 
   const removeLeftFilter = () => {
@@ -112,7 +112,7 @@ export const Jobs = () => {
     setCurrentPage(1)
   }
 
-  const rightFilter = (jobsList) => {
+  /* const rightFilter = (jobsList) => {
     if (company == "") {
       setJobs(allJobs)
       return
@@ -122,7 +122,7 @@ export const Jobs = () => {
     ))
     setJobs(rightFilArr)
 
-  }
+  } */
   const removeRightFilter = () => {
     setCompany("")
     leftFilter(allJobs)
@@ -222,7 +222,7 @@ export const Jobs = () => {
                       }
 
                     </ul>
-                    <div className='pt-5'>
+                  {/*   <div className='pt-5'>
                       <p className='text-xl pb-3 underline underline-offset-4'>Salary</p>
 
                       <Slider
@@ -233,13 +233,13 @@ export const Jobs = () => {
                         min={0}
                         max={2000000}
                       />
-                    </div>
+                    </div> */}
 
 
-                    <div className='flex flex-col gap-4 w-2/3 pt-5'>
+                    {/* <div className='flex flex-col gap-4 w-2/3 pt-5'>
                       <button onClick={() => leftFilter(jobs)} className='blueCol px-1 py-1 text-xs'>Apply Filter</button>
                       <button onClick={() => removeLeftFilter()} className='blueCol px-1 py-1 text-xs'>Remove Filter</button>
-                    </div>
+                    </div> */}
 
                   </div>
 
@@ -337,10 +337,10 @@ export const Jobs = () => {
                             </div>
 
 
-                            <div className='flex text-sm flex-col gap-4 w-2/3 pt-5'>
+                          {/*   <div className='flex text-sm flex-col gap-4 w-2/3 pt-5'>
                               <button onClick={() => leftFilter(jobs)} className='blueCol px-1 py-1 text-xs'>Apply Filter</button>
                               <button onClick={() => removeLeftFilter()} className='blueCol px-1 py-1 text-xs'>Remove Filter</button>
-                            </div>
+                            </div> */}
 
                           </div>
 
@@ -356,10 +356,10 @@ export const Jobs = () => {
                                 ))
                               }
                             </div>
-                            <div className='flex text-sm flex-col gap-4 pt-5'>
+                           {/*  <div className='flex text-sm flex-col gap-4 pt-5'>
                               <button onClick={() => rightFilter(jobs)} className='blueCol px-1 py-1 text-xs'>Apply Search</button>
                               <button onClick={() => removeRightFilter()} className='blueCol px-1 py-1 text-xs'>Remove Search</button>
-                            </div>
+                            </div> */}
                           </div>
 
                         </div>
@@ -387,10 +387,10 @@ export const Jobs = () => {
                         ))
                       }
                     </div>
-                    <div className='flex flex-col gap-4 pt-5'>
+                 {/*    <div className='flex flex-col gap-4 pt-5'>
                       <button onClick={() => rightFilter(jobs)} className='blueCol px-1 py-1 text-xs'>Apply Search</button>
                       <button onClick={() => removeRightFilter()} className='blueCol px-1 py-1 text-xs'>Remove Search</button>
-                    </div>
+                    </div> */}
                   </div>
 
                 </div>}

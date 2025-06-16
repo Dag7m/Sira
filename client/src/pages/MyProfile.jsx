@@ -9,12 +9,29 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AddEducationForm from './AddEducationForm';
 import AddExperienceForm from './AddExperienceForm';
+import CreateProfileForm from './CreateProfileForm';
+import UpdateProfileForm from './UpdateProfileForm';
 
 export const MyProfile = () => {
   const [educations, setEducations] = useState([]);
   const [experiences, setExperiences] = useState([]);
   const [eduModalOpen, setEduModalOpen] = useState(false);
   const [expModalOpen, setexpModalOpen] = useState(false);
+  const [profile, setProfile] = useState(null);
+  const [createProfileModal, setCreateProfileModal] = useState(false);
+  const [updateProfileModal, setUpdateProfileModal] = useState(false);
+
+  const fetchProfile = async () => {
+    const token = localStorage.getItem('userToken');
+    try {
+      const res = await axios.get('http://localhost:5000/api/profile/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProfile(res.data);
+    } catch (err) {
+      console.error('Error fetching profile', err);
+    }
+  };
 
   const { loading, me, isLogin } = useSelector(state => state.user);
   const [opened, { open, close }] = useDisclosure(false);
@@ -89,6 +106,7 @@ export const MyProfile = () => {
 
   useEffect(() => {
     fetchData();
+    fetchProfile();
   }, []);
 
   return (
@@ -176,6 +194,58 @@ export const MyProfile = () => {
                       {convertDateFormat(me.created_at.substr(0, 10))}
                     </p>
                   </div>
+                  <div className="p-6">
+      <div className="bg-gray-800 p-6 rounded-xl mb-10 text-center shadow-lg">
+        {profile ? (
+          <>
+            <p className="text-lg font-semibold">Bio:</p>
+            <p className="text-gray-300 mb-4">{profile.bio}</p>
+            <p className="text-lg font-semibold">Skills:</p>
+            <p className="text-gray-300 mb-4">{profile.skills}</p>
+            <p className="text-lg font-semibold">Resume:</p>
+            <a
+              href={profile.resume_url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-400 underline mb-4 block"
+            >
+              View Resume
+            </a>
+            <button onClick={() => setUpdateProfileModal(true)} className="bg-yellow-600 px-4 py-2 rounded">
+              Update Profile
+            </button>
+          </>
+        ) : (
+          <>
+            <p className="text-gray-300 mb-4">No profile created yet.</p>
+            <button onClick={() => setCreateProfileModal(true)} className="bg-green-600 px-4 py-2 rounded">
+              Create Profile
+            </button>
+          </>
+        )}
+      </div>
+
+      {createProfileModal && (
+        <CreateProfileForm
+          onSuccess={() => {
+            fetchProfile();
+            setCreateProfileModal(false);
+          }}
+          onClose={() => setCreateProfileModal(false)}
+        />
+      )}
+
+      {updateProfileModal && (
+        <UpdateProfileForm
+          existingProfile={profile}
+          onSuccess={() => {
+            fetchProfile();
+            setUpdateProfileModal(false);
+          }}
+          onClose={() => setUpdateProfileModal(false)}
+        />
+      )}
+    </div>
                   {/* <div>
                     <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">Skills</h2>
                     <div className="text-lg sm:text-xl text-gray-300 mt-3 flex flex-wrap gap-2">
@@ -237,11 +307,11 @@ export const MyProfile = () => {
                           Delete Account
                         </button>
                       </Link>
-                      <Link to="/editProfile">
+                    {/*   <Link to="/editProfile">
                         <button className="bg-blue-600/80 hover:bg-blue-500/90 w-full text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                           Edit Profile
                         </button>
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>

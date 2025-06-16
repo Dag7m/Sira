@@ -33,13 +33,7 @@ exports.register = async (req, res) => {
         role,
       ]
     );
- const userId = result.insertId;
-  if (role === 'admin') {
-      await pool.query(
-        `INSERT INTO admins (user_id) VALUES (?)`,
-        [userId]
-      );
-    }
+
     // Get the inserted user
     const [userRows] = await pool.query('SELECT * FROM users WHERE user_id = ?', [
       result.insertId,
