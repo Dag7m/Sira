@@ -38,7 +38,8 @@ const createTables = async (pool) => {
   resume_url VARCHAR(255),
   skills JSON,
   avatar VARCHAR(255),
-  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+  UNIQUE(user_id)
 )
      `);
             await connection.query(`
