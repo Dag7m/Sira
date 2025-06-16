@@ -71,17 +71,17 @@ export const JobDetails = () => {
                 <div className=''>
                    <img src={jobDetails && jobDetails.company_logo_url} className='md:h-32 h-24 w-24 md:w-32' alt="" />
                 </div>
-                <div className='flex  items-center w-[6rem]'>
+             {/*    <div className='flex  items-center w-[6rem]'>
                   <img src={jobDetails && jobDetails.company_logo_url} className='' alt="" />
-                </div>
+                </div> */}
                 <div className='flex flex-col gap-2 md:pt-2'>
                   <p className='text-xl flex gap-1 items-center  md:text-3xl'><BiBriefcase /> {jobDetails.title}</p>
-                  <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.company_name}</p>
+                  {/* <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.company_name}</p> */}
                   <p className='text-lg flex gap-2 items-center  md:text-2xl'><BsPersonWorkspace size={20} />{jobDetails.employment_type}</p>
-                  <p className='text-lg flex gap-1.5 items-center  md:text-2xl'><HiStatusOnline size={20} /><span className={` ${jobDetails.status === "active" ? "text-green-700" : "text-red-500"} 
+                 {/*  <p className='text-lg flex gap-1.5 items-center  md:text-2xl'><HiStatusOnline size={20} /><span className={` ${jobDetails.status === "active" ? "text-green-700" : "text-red-500"} 
                   w-20 text-center rounded-lg font-semibold`} >
                     {jobDetails.status}
-                  </span></p>
+                  </span></p> */}
                   
                 </div>
 
@@ -95,7 +95,7 @@ export const JobDetails = () => {
                 </div>
                 <div>
                   <ul className='flex flex-col gap-3'>
-                    <li className='flex items-center gap-3'>Posted By: <div>{jobDetails.posted_by}</div></li>
+                    {/* <li className='flex items-center gap-3'>Posted By: <div>{jobDetails.posted_by}</div></li> */}
                     <li className='flex items-center gap-3'>Posted At: <div>{convertDateFormat(jobDetails.created_at.substr(0, 10))}</div></li>
                     <li className='flex items-center gap-3'>Location: <div> {jobDetails.location}</div></li>
                     <li className='flex items-center gap-3'>Salary: <div className='flex items-center' > <span>{(jobDetails.salary)}ETB</span></div></li>

@@ -9,44 +9,30 @@ const AdminSlice = createSlice({
         allUsers: null,
         error: null,
         applicationData: {
-            job: {
+            
                 title: "",
-                companyName: "",
+                company_name: "",
                 location: "",
                 experience: "",
-                companyName: ""
-            },
-            applicant: {
-                name: "",
-                email: ""
-            },
-            applicantResume: {
-                url: ""
-            },
-            status: "",
-            createdAt: ""
-        },
-        userData: {
+           
+                application_id: "",
+
+                created_at: "",
+       
+
             name: "",
             email: "",
             role: "",
-            createdAt: "",
-            avatar: {
-                url: "",
-            },
-        },
-        jobData: {
-            title: "",
+         
+
+
+        
             description: "",
-            companyName: "",
-            companyLogo: {
-                url: ""
-            },
-            location: "",
-            skillsRequired: [],
+         
+            skillsRequired: "",
             category: "",
-            employmentType: "",
-            experience: "",
+            employment_type: "",
+        
             salary: ""
         }
     },

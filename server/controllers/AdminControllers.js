@@ -1,256 +1,177 @@
-const Job = require('../models/JobModel')
-const User = require('../models/UserModel')
-const Application = require('../models/AppModel')
-const cloudinary = require('cloudinary')
 
+const { initializeDatabase } = require('../config/database');
+
+let pool; // Pool will be initialized once
+
+// Initialize the pool when the module is loaded
+(async () => {
+  pool = await initializeDatabase();
+})();
 
 // Get all jobs
-exports.getAllJobs = async (req,res) => {
-    try{
-        const jobs = await Job.find() ;
+exports.getAllJobs = async (req, res) => {
+  try {
+    const [jobs] = await pool.query('SELECT * FROM jobs');
+    res.status(200).json({ success: true, jobs });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 
-        res.status(200).json({
-            success: true,
-            jobs
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }                
-}
-
-// Get all Users
-exports.getAllUsers = async (req,res) => {
-    try{
-        const users = await User.find() ;
-
-        res.status(200).json({
-            success: true,
-            users
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
+// Get all users
+exports.getAllUsers = async (req, res) => {
+  try {
+    const [users] = await pool.query('SELECT * FROM users');
+    res.status(200).json({ success: true, users });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 
 // Get all applications
-exports.getAllApp = async (req,res) => {
-    try{
-        const applications = await Application.find().populate("job applicant") ;
+exports.getAllApp = async (req, res) => {
+  try {
+    const [applications] = await pool.query(`
+      SELECT applications.*, jobs.title AS job_title, users.name AS applicant_name
+      FROM applications
+      JOIN jobs ON applications.job_id = jobs.job_id
+      JOIN users ON applications.applicant_id = users.user_id
+    `);
+    res.status(200).json({ success: true, applications });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 
-        res.status(200).json({
-            success: true,
-            applications
-        })
+// Get single application
+exports.getApplication = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT * FROM applications WHERE application_id = ?`,
+      [req.params.id]
+    );
+    res.status(200).json({ success: true, application: rows[0] });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
+// Update application status
+exports.updateApplication = async (req, res) => {
+  try {
+    await pool.query(
+      `UPDATE applications SET status = ? WHERE application_id = ?`,
+      [req.body.status, req.params.id]
+    );
+    res.status(200).json({ success: true, message: 'Application Updated' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Delete application
+exports.deleteApplication = async (req, res) => {
+  try {
+    await pool.query(`DELETE FROM applications WHERE application_id = ?`, [req.params.id]);
+    res.status(200).json({ success: true, message: 'Application Deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Get single user
+exports.getUser = async (req, res) => {
+  try {
+    const [rows] = await pool.query(`SELECT * FROM users WHERE user_id = ?`, [
+      req.params.id,
+    ]);
+    res.status(200).json({ success: true, user: rows[0] });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Update user role
+exports.updateUser = async (req, res) => {
+  try {
+    await pool.query(`UPDATE users SET role = ? WHERE user_id = ?`, [
+      req.body.role,
+      req.params.id,
+    ]);
+    res.status(200).json({ success: true, message: 'User Updated' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Delete user
+exports.deleteUser = async (req, res) => {
+  try {
+    await pool.query(`DELETE FROM users WHERE user_id = ?`, [req.params.id]);
+    res.status(200).json({ success: true, message: 'User Deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Get single job
+exports.getJob = async (req, res) => {
+  try {
+    const [rows] = await pool.query(`SELECT * FROM jobs WHERE job_id = ?`, [
+      req.params.id,
+    ]);
+    res.status(200).json({ success: true, job: rows[0] });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Update job (with Cloudinary image update)
+const cloudinary = require('cloudinary');
+
+exports.updateJob = async (req, res) => {
+  try {
+    const [rows] = await pool.query(`SELECT * FROM jobs WHERE job_id = ?`, [
+      req.params.id,
+    ]);
+    const job = rows[0];
+
+    if (job && job.company_logo_public_id) {
+      await cloudinary.v2.uploader.destroy(job.company_logo_public_id);
     }
-}
 
-// Update Application Status
-exports.updateApplication = async (req,res) => {
-    try{
+    const uploaded = await cloudinary.v2.uploader.upload(
+      req.body.companyLogo,
+      {
+        folder: 'logo',
+        crop: 'scale',
+      }
+    );
 
-        const application = await Application.findById(req.params.id) ;
+    await pool.query(
+      `UPDATE jobs SET title = ?, description = ?, location = ?, company_logo_url = ?, company_logo_public_id = ? WHERE job_id = ?`,
+      [
+        req.body.title,
+        req.body.description,
+        req.body.location,
+        uploaded.secure_url,
+        uploaded.public_id,
+        req.params.id,
+      ]
+    );
 
-        application.status = req.body.status ;
+    res.status(200).json({ success: true, message: 'Job Updated' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 
-        await application.save() ;
-
-        res.status(200).json({
-            success: true,
-            message: "Application Updated"
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-// Delete Application
-exports.deleteApplication = async (req,res) => {
-    try{
-
-        const application = await Application.findByIdAndRemove(req.params.id) ;
-
-        res.status(200).json({
-            success: true ,
-            message: "Application Deleted"
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-// Get Application
-exports.getApplication = async (req,res) => {
-    try{
-        const application = await Application.findById(req.params.id).populate("job applicant") ;
-
-        res.status(200).json({
-            success: true,
-            application
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-
-
-// Update User Role
-exports.updateUser = async (req,res) => {
-    try{
-        const user = await User.findById(req.params.id) ;
-
-        user.role = req.body.role ;
-
-        await user.save() ;
-
-        res.status(200).json({
-            success: true,
-            message: "User Updated"
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-
-// Delete User
-exports.deleteUser = async (req,res) => {
-    try{
-        const user = await User.findByIdAndRemove(req.params.id) ;
-
-        res.status(200).json({
-            success: true,
-            message: "User Deleted"
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-
-// Get User
-exports.getUser = async (req,res) => {
-    try{
-        const user = await User.findById(req.params.id) ;
-
-        res.status(200).json({
-            success: true,
-            user
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-
-
-// Update Job
-exports.updateJob = async (req,res) => {
-    try{    
-
-        const job = await Job.findById(req.params.id) ;
-
-        const logoToDelete_Id = job.companyLogo.public_id ;
-
-        await cloudinary.v2.uploader.destroy(logoToDelete_Id) ;
-
-        const logo = req.body.companyLogo  ;
-
-        const myCloud = await cloudinary.v2.uploader.upload(logo, {
-            folder: 'logo',
-            crop: "scale",
-        })
-
-        req.body.companyLogo = {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url
-        }
-
-        const updatedJob = await Job.findByIdAndUpdate(req.params.id, req.body, { new: true }) ;
-
-        
-
-        res.status(200).json({
-            success: true,
-            message: "Job Updated"
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-
-
-// Get Single Job
-exports.getJob = async (req,res) => {
-    try{    
-
-        const job = await Job.findById(req.params.id)
-
-        res.status(200).json({
-            success: true,
-            job
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
-
-
-// Delete Single Job
-exports.deleteJob = async (req,res) => {
-    try{    
-
-        const job = await Job.findByIdAndRemove(req.params.id)
-
-        res.status(200).json({
-            success: true,
-            message: "Job Deleted"
-        })
-
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
+// Delete job
+exports.deleteJob = async (req, res) => {
+  try {
+    await pool.query(`DELETE FROM jobs WHERE job_id = ?`, [req.params.id]);
+    res.status(200).json({ success: true, message: 'Job Deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
