@@ -7,32 +7,22 @@ const AdminSlice = createSlice({
         allJobs: null,
         allApplications: null,
         allUsers: null,
+        allCompanies: null,
         error: null,
         applicationData: {
-            
-                title: "",
-                company_name: "",
-                location: "",
-                experience: "",
-           
-                application_id: "",
-
-                created_at: "",
-       
-
+            title: "",
+            company_name: "",
+            location: "",
+            experience: "",
+            application_id: "",
+            created_at: "",
             name: "",
             email: "",
             role: "",
-         
-
-
-        
             description: "",
-         
             skillsRequired: "",
             category: "",
             employment_type: "",
-        
             salary: ""
         }
     },
@@ -46,9 +36,8 @@ const AdminSlice = createSlice({
         },
         getAllJobsFail: (state, action) => {
             state.loading = false
-            error = action.payload
+            state.error = action.payload
         },
-
 
         getAllUsersRequest: (state) => {
             state.loading = true
@@ -59,9 +48,8 @@ const AdminSlice = createSlice({
         },
         getAllUsersFail: (state, action) => {
             state.loading = false
-            error = action.payload
+            state.error = action.payload
         },
-
 
         getAllAppRequest: (state) => {
             state.loading = true
@@ -72,7 +60,7 @@ const AdminSlice = createSlice({
         },
         getAllAppFail: (state, action) => {
             state.loading = false
-            error = action.payload
+            state.error = action.payload
         },
 
         getAppRequest: (state) => {
@@ -109,7 +97,6 @@ const AdminSlice = createSlice({
             state.error = action.payload
         },
 
-
         getUserRequest: (state) => {
             state.loading = true
         },
@@ -121,7 +108,6 @@ const AdminSlice = createSlice({
             state.loading = false
             state.error = action.payload
         },
-
 
         updateUserRequest: (state) => {
             state.loading = true
@@ -157,7 +143,6 @@ const AdminSlice = createSlice({
             state.error = action.payload;
         },
 
-
         updateJobRequest: (state) => {
             state.loading = true;
         },
@@ -168,7 +153,6 @@ const AdminSlice = createSlice({
             state.loading = false;
             state.error = action.payload
         },
-
 
         deleteJobRequest: (state) => {
             state.loading = true;
@@ -181,6 +165,39 @@ const AdminSlice = createSlice({
             state.error = action.payload
         },
 
+        getAllCompaniesRequest: (state) => {
+            state.loading = true;
+        },
+        getAllCompaniesSuccess: (state, action) => {
+            state.loading = false;
+            state.allCompanies = action.payload
+        },
+        getAllCompaniesFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload
+        },
+
+        addCompanyRequest: (state) => {
+            state.loading = true;
+        },
+        addCompanySuccess: (state) => {
+            state.loading = false;
+        },
+        addCompanyFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload
+        },
+
+        deleteCompanyRequest: (state) => {
+            state.loading = true;
+        },
+        deleteCompanySuccess: (state) => {
+            state.loading = false;
+        },
+        deleteCompanyFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload
+        },
     }
 })
 
@@ -188,18 +205,17 @@ export const {
     getAllJobsRequest, getAllJobsSuccess, getAllJobsFail,
     getAllUsersRequest, getAllUsersSuccess, getAllUsersFail,
     getAllAppRequest, getAllAppSuccess, getAllAppFail,
-
     getAppRequest, getAppSuccess, getAppFail,
     updateAppRequest, updateAppSuccess, updateAppFail,
     deleteAppRequest, deleteAppSuccess, deleteAppFail,
-
     getUserRequest, getUserSuccess, getUserFail,
     updateUserRequest, updateUserSuccess, updateUserFail,
     deleteUserRequest, deleteUserSuccess, deleteUserFail,
-    
     getJobRequest, getJobSuccess, getJobFail,
     updateJobRequest, updateJobSuccess, updateJobFail,
-    deleteJobRequest, deleteJobSuccess, deleteJobFail
-
+    deleteJobRequest, deleteJobSuccess, deleteJobFail,
+    getAllCompaniesRequest, getAllCompaniesSuccess, getAllCompaniesFail,
+    addCompanyRequest, addCompanySuccess, addCompanyFail,
+    deleteCompanyRequest, deleteCompanySuccess, deleteCompanyFail
 } = AdminSlice.actions;
 export default AdminSlice.reducer;

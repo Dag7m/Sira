@@ -175,3 +175,36 @@ exports.deleteJob = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+exports.getAllCompanies = async (req, res) => {
+  try {
+    const [companies] = await pool.query('SELECT * FROM companies');
+    res.status(200).json({ success: true, companies });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Add a company
+exports.addCompany = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    await pool.query(
+      'INSERT INTO companies (name, description) VALUES (?, ?)',
+      [name, description]
+    );
+    res.status(201).json({ success: true, message: 'Company Added' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Delete a company
+exports.deleteCompany = async (req, res) => {
+  try {
+    await pool.query(`DELETE FROM companies WHERE id = ?`, [req.params.id]);
+    res.status(200).json({ success: true, message: 'Company Deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};

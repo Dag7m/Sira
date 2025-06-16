@@ -1,5 +1,5 @@
 const express = require("express")
-const {getAllJobs, getAllUsers, getAllApp, updateApplication, deleteApplication, updateUser, deleteUser, getApplication, getUser, getJob, updateJob, deleteJob} = require('../controllers/AdminControllers')
+const {getAllJobs, getAllUsers, getAllApp, updateApplication, deleteApplication, updateUser, deleteUser, getApplication, getUser, getJob, updateJob, deleteJob, getAllCompanies, addCompany, deleteCompany} = require('../controllers/AdminControllers')
 const {isAuthenticated, authorizationRoles} = require('../middlewares/auth')
 const {applicationIdValidator,validateHandler , userIdValidator, JobIdValidator} = require('../middlewares/validators');
 const router = express.Router() ;
@@ -20,6 +20,9 @@ router.route("/admin/getJob/:id").get(isAuthenticated ,authorizationRoles("admin
 router.route("/admin/updateJob/:id").put(isAuthenticated ,authorizationRoles("admin") ,JobIdValidator(),validateHandler, updateJob)
 router.route("/admin/deleteJob/:id").delete(isAuthenticated ,authorizationRoles("admin") ,JobIdValidator(),validateHandler, deleteJob)
 
+router.route("/admin/allCompanies").get(isAuthenticated, authorizationRoles("admin"), getAllCompanies)
+router.route("/admin/addCompany").post(isAuthenticated, authorizationRoles("admin"), addCompany)
+router.route("/admin/deleteCompany/:id").delete(isAuthenticated, authorizationRoles("admin"), JobIdValidator(), validateHandler, deleteCompany)
 
 
 module.exports = router ;

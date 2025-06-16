@@ -6,7 +6,6 @@ import { AiOutlineUser } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 
-
 export const Sidebar = ({sideTog}) => {
 
     const sidebarVariants = {
@@ -56,6 +55,12 @@ export const Sidebar = ({sideTog}) => {
                     <div className='flex justify-center gap-2 items-center'>
                         <Link to="/admin/allUsers" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
                             <AiOutlineUser size={20} />View All Users
+                        </Link>
+                    </div>
+
+                    <div className='flex justify-center gap-2 items-center'>
+                        <Link to="/admin/allCompanies" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
+                            <MdBusiness size={20} />View All Companies
                         </Link>
                     </div>
 
