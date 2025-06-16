@@ -10,7 +10,10 @@ import {
     deleteUserRequest,deleteUserSuccess,deleteUserFail,
     getJobRequest, getJobSuccess, getJobFail,
     updateJobRequest, updateJobSuccess, updateJobFail,
-    deleteJobRequest, deleteJobSuccess, deleteJobFail
+    deleteJobRequest, deleteJobSuccess, deleteJobFail,
+    getAllCompaniesRequest, getAllCompaniesSuccess, getAllCompaniesFail,
+    addCompanyRequest, addCompanySuccess, addCompanyFail,
+    deleteCompanyRequest, deleteCompanySuccess, deleteCompanyFail
 } from '../slices/AdminSlice'
 import axios from 'axios'
 import {toast} from 'react-toastify'
@@ -272,5 +275,65 @@ export const deleteJobData = (id) => async (dispatch) => {
 
     }catch(err){    
         dispatch(deleteJobFail(err.response.data.message)) ;
+    }
+}
+export const getAllCompaniesAdmin = () => async (dispatch) => {
+    try {
+        dispatch(getAllCompaniesRequest());
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('userToken')}`
+            } 
+        }
+
+        const { data } = await axios.get("http://localhost:5000/api/v1/admin/allCompanies", config);
+
+        dispatch(getAllCompaniesSuccess(data.companies))
+
+    } catch (err) {
+        dispatch(getAllCompaniesFail(err.response.data.message));
+    }
+}
+
+export const addCompanyData = (companyData) => async (dispatch) => {
+    try {
+        dispatch(addCompanyRequest());
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('userToken')}`
+            } 
+        }
+
+        const { data } = await axios.post("http://localhost:5000/api/v1/admin/addCompany", companyData, config);
+
+        dispatch(addCompanySuccess())
+        dispatch(getAllCompaniesAdmin())
+        toast.success("Company Added Successfully !")
+
+    } catch (err) {
+        dispatch(addCompanyFail(err.response.data.message));
+    }
+}
+
+export const deleteCompanyData = (id) => async (dispatch) => {
+    try {
+        dispatch(deleteCompanyRequest());
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('userToken')}`
+            } 
+        }
+
+        const { data } = await axios.delete(`http://localhost:5000/api/v1/admin/deleteCompany/${id}`, config);
+
+        dispatch(deleteCompanySuccess())
+        dispatch(getAllCompaniesAdmin())
+        toast.success("Company Deleted Successfully !")
+
+    } catch (err) {
+        dispatch(deleteCompanyFail(err.response.data.message));
     }
 }

@@ -35,7 +35,7 @@ import { Test } from './pages/Test'
 import NotFound from './pages/NotFound'
 import UnAuthorized from './pages/UnAuthorized'
 import ScrollToTopWhenRouteChanges from './components/ScrollToTopOnRouteChange.jsx'
-
+import { AllCompanies } from './pages/AllCompanies'
 
 
 function App() {
@@ -107,6 +107,7 @@ function App() {
           <Route path='/admin/update/application/:id' element={<EditAppAdmin />} />
           <Route path='/admin/user/role/:id' element={<EditUserAdmin />} />
           <Route path='/admin/job/details/:id' element={<EditJobAdmin />} />
+          <Route path='/admin/allCompanies' element={<AllCompanies />} />
         </Route>
 
 
