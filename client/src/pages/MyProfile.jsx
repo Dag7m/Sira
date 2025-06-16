@@ -37,7 +37,6 @@ export const MyProfile = () => {
     const month = parts[1];
     const year = parts[0];
     return `${day}-${month}-${year}`;
-<<<<<<< Updated upstream
   };
 
   const handleDeleteExperience = async (id) => {
@@ -92,9 +91,6 @@ export const MyProfile = () => {
     fetchData();
   }, []);
 
-=======
-  }
->>>>>>> Stashed changes
   return (
     <>
       <MetaData title="My Profile" />
@@ -137,7 +133,6 @@ export const MyProfile = () => {
                     ))
                   )}
                 </div>
-<<<<<<< Updated upstream
 
                 {/* Education */}
                 <div className="bg-gray-800/70 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-700/50 hover:border-yellow-500 hover:shadow-lg transition-all duration-300">
@@ -267,60 +262,6 @@ export const MyProfile = () => {
             </div>
           </div>
         )}
-=======
-                <div className='  md:w-1/2 w-full md:px-0 px-4 pb-20 md:pt-4 pt-8'>
-                  <div className='flex flex-col md:gap-5 gap-6'>
-                    <div>
-                      <p className='md:text-2xl text-xl'>Full Name</p>
-                      <p className='md:text-xl pt-1 text-lg'>{me.name}</p>
-                    </div>
-                    <div>
-                      <p className='md:text-2xl text-xl'>Email</p>
-                      <p className='md:text-xl pt-1 text-lg'>{me.email}</p>
-                    </div>
-                    <div>
-                      <p className='md:text-2xl text-xl'>Joined On</p>
-                      <p className='md:text-xl pt-1 text-lg'>{convertDateFormat(me.created_at.substr(0, 10))}</p>
-                    </div>
-                    <div>
-                      <p className='md:text-2xl text-xl'>Skills</p>
-                     {/*  <div className='md:text-xl text-lg pt-3 flex gap-3'>{
-                        me.skills.map((skill, i) => (
-                          <span key={i} className='bg-yellow-500 text-black  text-sm px-2 py-1  font-bold '>{skill}</span>
-                        ))
-                      }</div> */}
-                    </div>
-                    <div className='flex md:flex-row flex-col md:gap-8 pt-4 gap-3'>
-                      <ul className='flex flex-col gap-4'>
-
-                        <li className=' '> <Link  ><button onClick={open} className='blueCol w-2/3 md:w-full  font-medium px-6 py-1'>My Resume</button></Link> </li>
-                        <li className=' '>
-                          <Link to="/applied"><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>My Applications</button></Link>
-                        </li>
-                        <li className=' '>
-                          <Link to="/saved" ><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Saved Jobs</button></Link>
-                        </li>
-                      </ul>
-                      <ul className='flex flex-col gap-4'>
-                        <li className=' '>
-                          <Link to="/changePassword"><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Change Password</button></Link>
-                        </li>
-                        <li className=' '><Link to="/deleteAccount"><button className='blueCol w-2/3 md:w-full font-medium px-6 py-1'>Delete Account</button></Link></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <Modal opened={opened} onClose={close} title="Resume">
-{/*                   <div>
-                    <img src={me.resume.url} className='w-full h-full' alt="" />
-                  </div> */}
-                 
-                </Modal>
-              </div>
-
-            </>
-        }
->>>>>>> Stashed changes
       </div>
     </>
   );
