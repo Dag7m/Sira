@@ -60,15 +60,16 @@ export const EditUserAdmin = () => {
                                     </div>
                                     <div className='flex gap-3  pt-3 py-2 text-xl justify-start items-center'>
                                         <div>Name:</div>
-                                        <div>{userData.name}</div>
+                                        <div>{userData?.name || 'N/A'}</div>
                                     </div>
                                     <div className='flex gap-3   py-2 text-xl justify-start items-center'>
                                         <div>Email:</div>
-                                        <div>{userData.email}</div>
+                                        <div>{userData?.email || 'N/A'}</div>
                                     </div>
                                     <div className='flex gap-3 border-b border-gray-700 py-2 text-xl justify-start items-center'>
                                         <div>Role:</div>
-                                        <div>{userData.role}</div>
+                                       <div>{userData?.role || 'N/A'}</div>
+
                                     </div>
                                     <div className='flex gap-3  pt-4 py-2 text-sm justify-start items-center'>
                                         <select onChange={(e) => setRole(e.target.value)} id="large" className="block w-full px-6 py-2 text-base  border  bg-gray-900 border-gray-600 placeholder-gray-400 text-white ">

@@ -39,6 +39,7 @@ const createTables = async (pool) => {
   resume_url VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE (user_id),
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
@@ -52,6 +53,7 @@ const createTables = async (pool) => {
   start_year YEAR,
   end_year YEAR,
   field_of_study VARCHAR(100),
+  UNIQUE (user_id, degree, institution,start_year,field_of_study),
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 )   `);
     await connection.query(`
@@ -63,6 +65,7 @@ const createTables = async (pool) => {
   start_date DATE,
   end_date DATE,
   description TEXT,
+  UNIQUE (user_id, company_name, job_title,start_date),
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 )`);
 
