@@ -125,6 +125,32 @@ export const EditProfile = () => {
                                         </div>
                                         <input value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='Email' type="email" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
                                     </div>
-
-
                                    
+                                    <div>
+                                        <button className='blueCol px-8 w-full py-2 flex justify-center items-center font-semibold' >Update</button>
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </form>
+                        </div>
+
+
+                    </div>
+
+                }
+
+
+            </div>
+
+
+
+
+
+
+        </>
+    )
+}
