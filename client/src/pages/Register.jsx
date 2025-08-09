@@ -101,7 +101,17 @@ const registerHandler = (e) => {
   <div className='text-gray-600 px-2'>
     <BsFileEarmarkText size={20} />
   </div>
-  <input value={role} onChange={(e) => setRole(e.target.value)} required placeholder='Role' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
+    <select
+    value={role}
+    onChange={(e) => setRole(e.target.value)}
+    required
+    className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2'
+  >
+    <option value="" disabled>Select Role</option>
+    <option value="admin">Admin</option>
+    <option value="job_seeker">Job Seeker</option>
+  </select>
+
 </div>
               <div>
                 <button disabled={loading} className='blueCol flex justify-center items-center px-8 w-full py-2 font-semibold' >
