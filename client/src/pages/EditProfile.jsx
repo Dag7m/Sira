@@ -125,7 +125,60 @@ export const EditProfile = () => {
                                         </div>
                                         <input value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='Email' type="email" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
                                     </div>
-                                   
+
+
+                                    {/* Profile */}
+                                  {/*   <div>
+                                        <div className='bg-white flex justify-center items-center'>
+                                            <div className='text-gray-600 px-2'>
+                                                <CgProfile size={20} />
+                                            </div>
+                                            <label htmlFor='avatar' className='outline-none w-full cursor-pointer text-black px-1 pr-3 py-2 '>
+                                                {avatarName.length === 0 ? <span className='text-gray-500 font-medium'>Select New Profile Pic...</span>
+                                                    : avatarName}
+                                            </label>
+                                            <input id='avatar' name='avatar' required
+                                                onChange={avatarChange}
+                                                placeholder='Profile' accept="image/*" type="file" className='outline-none  w-full hidden text-black px-1 pr-3 py-2' />
+
+
+                                        </div>
+                                        <p className='bg-gray-950 text-white text-xs'>Please select Image file</p>
+                                    </div> */}
+
+ 
+                                    {/* Resume */}
+                                    {/*
+                                    <div>
+                                        <div className='bg-white flex justify-center items-center'>
+                                            <div className='text-gray-600 px-2'>
+                                                <BsFileEarmarkText size={20} />
+                                            </div>
+                                            <label className='outline-none w-full text-black px-1 pr-3 py-2' htmlFor="resume">
+                                                {resumeName.length === 0 ? <span className='text-gray-500 cursor-pointer font-medium'>Select New Resume...</span> : resumeName}
+                                            </label>
+                                            <input required
+                                                onChange={resumeChange}
+                                                placeholder='Resume' id='resume' name='resume' accept="image/*" type="file" className='outline-none hidden w-full text-black px-1 pr-3 py-2' />
+                                        </div>
+                                        <p className='bg-gray-950 text-white text-xs'>Please select Image file</p>
+                                    </div> */}
+
+                                    {/* Skills */}
+                            {/*         <div className='bg-white flex justify-center items-center'>
+                                        <div className='text-gray-600 md:pb-12 pb-8 px-2'>
+                                            <MdOutlineFeaturedPlayList size={20} />
+                                        </div>
+                                        <textarea value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Skills' type="text" className='outline-none w-full text-black bold-placeholder px-1 pr-3 py-2' />
+                                    </div>
+ */}
+
+
+
+
+
+
+
                                     <div>
                                         <button className='blueCol px-8 w-full py-2 flex justify-center items-center font-semibold' >Update</button>
                                     </div>
