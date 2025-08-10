@@ -19,49 +19,6 @@ export const EditProfile = () => {
 
   const [name, setName] = useState(me.name);
   const [email, setEmail] = useState(me.email);
-/*   const [skills, setSkills] = useState(me.skills);
-
-  const [avatar, setAvatar] = useState("")
-  const [avatarName, setAvatarName] = useState("")
-
-  const [resume, setResume] = useState("")
-  const [resumeName, setResumeName] = useState("") */
-
-
-  
-
-
-
-/*   const avatarChange = (e) => {
-    if (e.target.name === "avatar") {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatar(reader.result);
-          setAvatarName(e.target.files[0].name)
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  }
-
-
-
-  const resumeChange = (e) => {
-    if (e.target.name === "resume") {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setResume(reader.result);
-          setResumeName(e.target.files[0].name)
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  }
- */
 
     const editHandler = (e) => {
         e.preventDefault()
