@@ -30,9 +30,7 @@ export const EditProfile = () => {
          const data = { 
              newName: name, 
              newEmail: email, 
-        /*      newAvatar: avatar, 
-             newResume: resume, 
-             newSkills: skillArr  */ 
+     
          }
 
          dispatch(updateProfile(data))
