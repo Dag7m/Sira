@@ -22,11 +22,6 @@ export const EditProfile = () => {
 
     const editHandler = (e) => {
         e.preventDefault()
-        /* let skillArr = skills
-        if(skills.constructor !== Array){
-             skillArr = skills.split(",")
-        }
- */
          const data = { 
              newName: name, 
              newEmail: email, 
