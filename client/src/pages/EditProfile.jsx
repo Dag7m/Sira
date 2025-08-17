@@ -37,7 +37,7 @@ export const EditProfile = () => {
         dispatch(ME())
         setName(me.name)
         setEmail(me.email)
-  /*       setSkills(me.skills) */
+ 
     },[dispatch])
 
     return (
