@@ -71,9 +71,7 @@ export const JobDetails = () => {
                 <div className=''>
                    <img src={jobDetails && jobDetails.company_logo_url} className='md:h-32 h-24 w-24 md:w-32' alt="" />
                 </div>
-             {/*    <div className='flex  items-center w-[6rem]'>
-                  <img src={jobDetails && jobDetails.company_logo_url} className='' alt="" />
-                </div> */}
+
                 <div className='flex flex-col gap-2 md:pt-2'>
                   <p className='text-xl flex gap-1 items-center  md:text-3xl'><BiBriefcase /> {jobDetails.title}</p>
                   {/* <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.company_name}</p> */}
