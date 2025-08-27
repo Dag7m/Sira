@@ -19,63 +19,13 @@ export const EditProfile = () => {
 
   const [name, setName] = useState(me.name);
   const [email, setEmail] = useState(me.email);
-/*   const [skills, setSkills] = useState(me.skills);
-
-  const [avatar, setAvatar] = useState("")
-  const [avatarName, setAvatarName] = useState("")
-
-  const [resume, setResume] = useState("")
-  const [resumeName, setResumeName] = useState("") */
-
-
-  
-
-
-
-/*   const avatarChange = (e) => {
-    if (e.target.name === "avatar") {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatar(reader.result);
-          setAvatarName(e.target.files[0].name)
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  }
-
-
-
-  const resumeChange = (e) => {
-    if (e.target.name === "resume") {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setResume(reader.result);
-          setResumeName(e.target.files[0].name)
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  }
- */
 
     const editHandler = (e) => {
         e.preventDefault()
-        /* let skillArr = skills
-        if(skills.constructor !== Array){
-             skillArr = skills.split(",")
-        }
- */
          const data = { 
              newName: name, 
              newEmail: email, 
-        /*      newAvatar: avatar, 
-             newResume: resume, 
-             newSkills: skillArr  */ 
+     
          }
 
          dispatch(updateProfile(data))
@@ -87,7 +37,7 @@ export const EditProfile = () => {
         dispatch(ME())
         setName(me.name)
         setEmail(me.email)
-  /*       setSkills(me.skills) */
+ 
     },[dispatch])
 
     return (
@@ -125,7 +75,16 @@ export const EditProfile = () => {
                                         </div>
                                         <input value={email} onChange={(e) => setEmail(e.target.value)} required placeholder='Email' type="email" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
                                     </div>
+
+
                                    
+
+
+
+
+
+
+
                                     <div>
                                         <button className='blueCol px-8 w-full py-2 flex justify-center items-center font-semibold' >Update</button>
                                     </div>

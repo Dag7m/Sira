@@ -63,7 +63,7 @@ export const Application = () => {
                             <ul>
                                 <li className='flex gap-4 items-center'>Name: <div>{me.name}</div></li>
                                 <li className='flex gap-4 items-center'>Email: <div>{me.email}</div></li>
-                                  
+                                
                             </ul>
                         </div>
 
