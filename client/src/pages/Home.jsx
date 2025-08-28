@@ -30,91 +30,101 @@ export const Home = () => {
         { link: "/images/JobData/20.jpg" },
     ];
     const [num, setNum] = useState(2);
-    const dispatch = useDispatch()
-    const { loading, allJobs } = useSelector(state => state.job)
-    const [jobs, setJobs] = useState([])
-
+    const dispatch = useDispatch();
+    const { loading, allJobs } = useSelector(state => state.job);
+    const [jobs, setJobs] = useState([]);
+    
     const convertDateFormat = (inputDate) => {
         const parts = inputDate.split('-');
         if (parts.length !== 3) {
             return "Invalid date format";
         }
-
         const day = parts[2];
         const month = parts[1];
         const year = parts[0];
-
         return `${day}-${month}-${year}`;
-    }
+    };
 
     const imagesPerPage = 5;
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [disableTransition, setDisableTransition] = useState(false);
 
-    
+    const extendedData = [...data, ...data]; 
 
     useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % (data.length-3));
-    },3000);
-    return () => clearInterval(interval);
-  }, [data.length]);
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => {
+                if (prev >= data.length) {
+                    // Disable transition before resetting to 0
+                    setDisableTransition(true);
+                    return 0; 
+                }
+                return prev + 1;
+            });
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [data.length]);
+
+    // Re-enable transition after resetting to 0
+    useEffect(() => {
+        if (disableTransition) {
+            // a timeout to re-enable transition after the reset
+            const timeout = setTimeout(() => {
+                setDisableTransition(false);
+            }, 20); // Small delay to ensure reset happens without animation
+            return () => clearTimeout(timeout);
+        }
+    }, [disableTransition]);
+
+    // transform value
+    const translateX = -(currentIndex * (100 / imagesPerPage));
 
     return (
-
         <>
             <MetaData title="Sira" />
-            <div className='min-h-screen md:px-20 px-3  pt-14 flex   text-white bg-gray-950'>
-                <div className='  w-full  flex  pt-28 flex-col justify-start  items-center gap-4'>
-
+            <div className='min-h-screen md:px-20 px-3 pt-14 flex text-white bg-gray-950'>
+                <div className='w-full flex pt-28 flex-col justify-start items-center gap-4'>
                     <div className='flex md:flex-row flex-col items-center justify-center md:gap-10 gap-1'>
                         <div className='md:text-8xl text-6xl titleT'>ስራ</div>
-                        <div className=' flex justify-center items-center pt-1'>
-                            <Link to="/jobs" className='font-semibold md:text-2xl text-lg blueCol  md:py-3 py-2 px-6 md:px-10 '>Browse Jobs</Link>
+                        <div className='flex justify-center items-center pt-1'>
+                            <Link to="/jobs" className='font-semibold md:text-2xl text-lg blueCol md:py-3 py-2 px-6 md:px-10'>Browse Jobs</Link>
                         </div>
                     </div>
                     <div>
                         <p className='md:text-xl text-sm'>Your <span className='text-yellow-500'>gateway</span> to job opportunities in Ethiopia and The Globe.</p>
-
                     </div>
-
 
                     <div className='pt-[8rem] md:px-[1rem] px-[0rem] w-full'>
                         <div className='titleT pb-6 text-2xl'>
                         </div>
-
-
                     </div>
 
-
-                    <div className='overflow-hidden w-4/5 pt-20 flex flex-col gap-4 md:px-[1rem] px-[1rem] '>
-                        <div className='text-2xl titleT '>
+                    <div className='overflow-hidden w-4/5 pt-20 flex flex-col gap-4 md:px-[1rem] px-[1rem]'>
+                        <div className='text-2xl titleT'>
                             Companies on our site
                         </div>
-                        <div className="flex transition-transform duration-1000 ease-in-out" style={{ transform: `translateX(-${currentIndex * (100 / imagesPerPage)}%)` }}>
-                            {
-                                data.map((item, i) => (
+                        <div className="relative w-full">
+                            <div 
+                                className={`flex ${disableTransition ? '' : 'tra    nsition-transform duration-[2s] ease-in-out'}`} 
+                                style={{ transform: `translateX(${translateX}%)` }}
+                            >
+                                {extendedData.map((item, i) => (
                                     <div key={i} className="flex justify-center items-center flex-[0_0_20%]">
-                                        <img src={item.link} alt="" className="w-24  object-contain" />
+                                        <img src={item.link} alt="" className="w-24 object-contain" />
                                     </div>
                                 ))}
+                            </div>
                         </div>
                     </div>
-
 
                     {/* <Testimonials /> */}
 
-                    <div className="pt-[7rem] pb-[10rem] md:px-[14rem] px-[1rem]   text-center">
+                    <div className="pt-[7rem] pb-[10rem] md:px-[14rem] px-[1rem] text-center">
                         <p>Discover the Power of Possibility with SIRA: Where Your Professional Journey Takes Flight, Guided by a Network of Diverse Opportunities!</p>
                     </div>
-
-
                 </div>
-
             </div>
-
-
         </>
-
-
     );
 };
