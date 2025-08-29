@@ -76,10 +76,7 @@ export const JobDetails = () => {
                   <p className='text-xl flex gap-1 items-center  md:text-3xl'><BiBriefcase /> {jobDetails.title}</p>
                   {/* <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.company_name}</p> */}
                   <p className='text-lg flex gap-2 items-center  md:text-2xl'><BsPersonWorkspace size={20} />{jobDetails.employment_type}</p>
-                 {/*  <p className='text-lg flex gap-1.5 items-center  md:text-2xl'><HiStatusOnline size={20} /><span className={` ${jobDetails.status === "active" ? "text-green-700" : "text-red-500"} 
-                  w-20 text-center rounded-lg font-semibold`} >
-                    {jobDetails.status}
-                  </span></p> */}
+                
                   
                 </div>
 
