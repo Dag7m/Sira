@@ -74,7 +74,6 @@ export const JobDetails = () => {
 
                 <div className='flex flex-col gap-2 md:pt-2'>
                   <p className='text-xl flex gap-1 items-center  md:text-3xl'><BiBriefcase /> {jobDetails.title}</p>
-                  {/* <p className='text-lg flex gap-1 items-center  md:text-2xl'><BiBuildings />{jobDetails.company_name}</p> */}
                   <p className='text-lg flex gap-2 items-center  md:text-2xl'><BsPersonWorkspace size={20} />{jobDetails.employment_type}</p>
                 
                   
