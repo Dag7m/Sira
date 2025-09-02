@@ -89,7 +89,6 @@ export const JobDetails = () => {
                 </div>
                 <div>
                   <ul className='flex flex-col gap-3'>
-                    {/* <li className='flex items-center gap-3'>Posted By: <div>{jobDetails.posted_by}</div></li> */}
                     <li className='flex items-center gap-3'>Posted At: <div>{convertDateFormat(jobDetails.created_at.substr(0, 10))}</div></li>
                     <li className='flex items-center gap-3'>Location: <div> {jobDetails.location}</div></li>
                     <li className='flex items-center gap-3'>Salary: <div className='flex items-center' > <span>{(jobDetails.salary)}ETB</span></div></li>
