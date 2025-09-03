@@ -93,16 +93,7 @@ export const Jobs = () => {
 
   }
 
- /*  const leftFilter = (jobsList) => {
-    if (category == "" && salary == 0) {
-      setJobs(allJobs)
-      return
-    }
-    const leftFilArr = jobsList.filter((item) => (
-      item.category.toLowerCase() === category.toLowerCase() && parseInt(item.salary) >= salary
-    ))
-    setJobs(leftFilArr)
-  } */
+
 
 
   const removeLeftFilter = () => {
