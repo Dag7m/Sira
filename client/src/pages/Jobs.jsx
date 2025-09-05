@@ -103,17 +103,6 @@ export const Jobs = () => {
     setCurrentPage(1)
   }
 
-  /* const rightFilter = (jobsList) => {
-    if (company == "") {
-      setJobs(allJobs)
-      return
-    }
-    const rightFilArr = jobsList.filter((item) => (
-      item.company_name.toLowerCase() === company.toLowerCase()
-    ))
-    setJobs(rightFilArr)
-
-  } */
   const removeRightFilter = () => {
     setCompany("")
     leftFilter(allJobs)
