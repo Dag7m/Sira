@@ -74,7 +74,7 @@ export const Footer = () => {
 
         <div className="flex flex-col pt-3 justify-center items-center">
           <p className="text-sm">
-            Designed and Developed by Database group Job portal
+            Designed and Developed by DB Job portal group
             
           </p>
 
