@@ -8,26 +8,27 @@ import Testimonials from '../components/Testimonials/Testimonials.jsx';
 
 export const Home = () => {
     const data = [
-        { link: "/images/JobData/1.png" },
-        { link: "/images/JobData/2.png" },
-        { link: "/images/JobData/3.jpg" },
-        { link: "/images/JobData/4.png" },
-        { link: "/images/JobData/5.png" },
-        { link: "/images/JobData/6.jpg" },
-        { link: "/images/JobData/7.png" },
-        { link: "/images/JobData/8.png" },
-        { link: "/images/JobData/9.png" },
-        { link: "/images/JobData/10.png" },
-        { link: "/images/JobData/ride.png" },
-        { link: "/images/JobData/12.jpg" },
-        { link: "/images/JobData/13.jpg" },
-        { link: "/images/JobData/14.png" },
-        { link: "/images/JobData/15.png" },
-        { link: "/images/JobData/16.jpg" },
-        { link: "/images/JobData/17.jpg" },
-        { link: "/images/JobData/18.jpg" },
-        { link: "/images/JobData/19.jpg" },
-        { link: "/images/JobData/20.jpg" },
+        { logo: "/images/JobData/1.png" , link: "https://eec.com.et/" },
+        { logo: "/images/JobData/2.png" , link: "https://ethio.post/"},
+        { logo: "/images/JobData/3.jpg" , link: "https://www.sur.com.et/"},
+        { logo: "/images/JobData/5.png" , link: "https://www.aau.edu.et/"},
+        { logo: "/images/JobData/4.png" , link: "https://www.combanketh.et/"},
+        { logo: "/images/JobData/6.jpg" , link: "https://www.safaricom.com/"},
+        { logo: "/images/JobData/7.png" , link: "https://www.moh.gov.et/en/node/35?language_content_entity=en"},
+        { logo: "/images/JobData/8.png" , link: "https://www.ethiopianairlines.com/"},
+        { logo: "/images/JobData/9.png" , link: "https://ebstv.tv/"},
+        { logo: "/images/JobData/10.png" , link: "https://www.ethiotelecom.et/"},
+        { logo: "/images/JobData/ride.png" , link: "https://ride8294.com/"},
+        { logo: "/images/JobData/11.jpg" , link: "https://eic-et.com/"},
+        { logo: "/images/JobData/12.jpg" , link: "https://www.hilton.com/en/hotels/addhitw-hilton-addis-ababa/"},
+        { logo: "/images/JobData/13.jpg" , link: "https://www.washingtonhealth.com/"},
+        { logo: "/images/JobData/14.png" , link: "https://feres.et/"},
+        { logo: "/images/JobData/15.png" , link: "https://www.bgiethiopia.com/"},
+        { logo: "/images/JobData/16.jpg" , link: "https://www.midrocinvestmentgroup.com/"},
+        { logo: "/images/JobData/17.jpg" , link: "https://dashenbanksc.com/"},
+        { logo: "/images/JobData/18.jpg" , link: "http://www.ethiopianelectricutility.gov.et/"},
+        { logo: "/images/JobData/19.jpg" , link: "https://redcrosseth.org/"},
+        { logo: "/images/JobData/20.jpg" , link: "https://redcrosseth.org/"},
     ];
     const [num, setNum] = useState(2);
     const dispatch = useDispatch();
@@ -88,7 +89,7 @@ export const Home = () => {
                     <div className='flex md:flex-row flex-col items-center justify-center md:gap-10 gap-1'>
                         <div className='md:text-8xl text-6xl titleT'>ስራ</div>
                         <div className='flex justify-center items-center pt-1'>
-                            <Link to="/jobs" className='font-semibold md:text-2xl text-lg blueCol md:py-3 py-2 px-6 md:px-10'>Browse Jobs</Link>
+                            <logo to="/jobs" className='font-semibold md:text-2xl text-lg blueCol md:py-3 py-2 px-6 md:px-10'>Browse Jobs</logo>
                         </div>
                     </div>
                     <div>
@@ -106,12 +107,12 @@ export const Home = () => {
                         </div>
                         <div className="relative w-full">
                             <div 
-                                className={`flex ${disableTransition ? '' : 'tra    nsition-transform duration-[2s] ease-in-out'}`} 
+                                className={`flex ${disableTransition ? '' : 'transition-transform duration-[2s] ease-in-out'}`} 
                                 style={{ transform: `translateX(${translateX}%)` }}
                             >
                                 {extendedData.map((item, i) => (
                                     <div key={i} className="flex justify-center items-center flex-[0_0_20%]">
-                                        <img src={item.link} alt="" className="w-24 object-contain" />
+                                        <a href={item.link} target='_blank'><img src={item.logo} alt="" className="w-24 object-contain" /></a>
                                     </div>
                                 ))}
                             </div>
@@ -120,7 +121,7 @@ export const Home = () => {
 
                     {/* <Testimonials /> */}
 
-                    <div className="pt-[7rem] pb-[10rem] md:px-[14rem] px-[1rem] text-center">
+                    <div className="pt-[4rem] pb-[5rem] md:px-[14rem] px-[1rem] text-center">
                         <p>Discover the Power of Possibility with SIRA: Where Your Professional Journey Takes Flight, Guided by a Network of Diverse Opportunities!</p>
                     </div>
                 </div>
