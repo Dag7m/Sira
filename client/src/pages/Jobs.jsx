@@ -138,7 +138,7 @@ export const Jobs = () => {
   const displayedData = jobs.slice(startIndex, endIndex);
 
   const pageButtons = [];
-  const maxButtonsToShow = 3; // Maximum number of page buttons to show
+  const maxButtonsToShow = 3;
 
   let startButton = Math.max(1, currentPage - Math.floor(maxButtonsToShow / 2));
   let endButton = Math.min(totalPageCount, startButton + maxButtonsToShow - 1);
