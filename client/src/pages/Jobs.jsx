@@ -202,18 +202,6 @@ export const Jobs = () => {
                       }
 
                     </ul>
-                  {/*   <div className='pt-5'>
-                      <p className='text-xl pb-3 underline underline-offset-4'>Salary</p>
-
-                      <Slider
-                        color="indigo"
-                        className='outline-none w-44'
-                        onChange={setSalary}
-                        value={salary}
-                        min={0}
-                        max={2000000}
-                      />
-                    </div> */}
 
 
                     {/* <div className='flex flex-col gap-4 w-2/3 pt-5'>
