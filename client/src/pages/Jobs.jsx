@@ -317,10 +317,7 @@ export const Jobs = () => {
                                 ))
                               }
                             </div>
-                           {/*  <div className='flex text-sm flex-col gap-4 pt-5'>
-                              <button onClick={() => rightFilter(jobs)} className='blueCol px-1 py-1 text-xs'>Apply Search</button>
-                              <button onClick={() => removeRightFilter()} className='blueCol px-1 py-1 text-xs'>Remove Search</button>
-                            </div> */}
+              
                           </div>
 
                         </div>
