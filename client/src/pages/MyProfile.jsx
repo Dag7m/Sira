@@ -246,19 +246,7 @@ export const MyProfile = () => {
         />
       )}
     </div>
-                  {/* <div>
-                    <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">Skills</h2>
-                    <div className="text-lg sm:text-xl text-gray-300 mt-3 flex flex-wrap gap-2">
-                      {me.skills.map((skill, i) => (
-                        <span
-                          key={i}
-                          className="bg-gray-700/50 text-gray-100 text-sm px-3 py-1.5 rounded-full font-semibold"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div> */}
+
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4">
