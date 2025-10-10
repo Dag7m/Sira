@@ -265,14 +265,7 @@ export const MyProfile = () => {
                       </button>
                     </div>
                     <div className="flex flex-col gap-4">
-                      {/* <Link to="#">
-                        <button
-                          onClick={open}
-                          className="bg-blue-600/80 hover:bg-blue-500/90 w-full text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                        >
-                          My Resume
-                        </button>
-                      </Link> */}
+ 
                       <Link to="/applied">
                         <button className="bg-blue-600/80 hover:bg-blue-500/90 w-full text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                           My Applications
