@@ -102,11 +102,7 @@ export const ViewAllAppli = () => {
                   <td className="px-6 py-4">
                     {app.applicant.name}
                   </td>
-{/*                   <td className={`px-6 py-4 ${
-                    app.status === "pending" ? "text-blue-500" : app.status === "rejected" ? "text-red-500" : "text-green-500"                
-                } `}>
-                    {app.status} 
-                  </td> */}
+
                   <td className="px-6 py-4">
                     {convertDateFormat(app.created_at.substr(0,10))}
                   </td>
