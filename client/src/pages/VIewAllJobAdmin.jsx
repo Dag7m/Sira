@@ -74,9 +74,6 @@ export const ViewAllJobAdmin = () => {
                       <th scope="col" className="px-6 py-3">
                         Job Name
                       </th>
-                   {/*    <th scope="col" className="px-6 py-3">
-                        Company
-                      </th> */}
                       <th scope="col" className="px-6 py-3">
                         Location
                       </th>
