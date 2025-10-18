@@ -100,9 +100,7 @@ export const ViewAllJobAdmin = () => {
                           <td className="px-6 py-4">
                             {job.title}
                           </td>
-                        {/*   <td className="px-6 py-4">
-                            {job.company_name}
-                          </td> */}
+
                           <td className="px-6 py-4">
                             {job.location}
                           </td>
