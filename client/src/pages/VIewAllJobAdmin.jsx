@@ -108,9 +108,7 @@ export const ViewAllJobAdmin = () => {
                             {convertDateFormat(job.created_at.substr(0, 10))}
                           </td>
                           <td className="px-6 flex gap-4 py-4">
-                          {/*   <Link to={`/admin/job/details/${job.job_id}`} className='text-blue-500 hover:text-blue-400 cursor-pointer'>
-                              <MdOutlineModeEditOutline size={20} />
-                            </Link> */}
+                        
 
                             <span className='text-red-500 hover:text-red-400 cursor-pointer'>
                               <AiOutlineDelete onClick={()=> deleteJobHandler(job.job_id)} size={20} />
