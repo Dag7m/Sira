@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Avatar } from '@mantine/core';
 import { FaBars } from 'react-icons/fa';
 import { RxCross1 } from 'react-icons/rx';
@@ -21,7 +21,7 @@ export const Navbar = () => {
     const [toggle, setToggle] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const location = useLocation();
 
     const isMobile = useIsMobile()
 
@@ -42,10 +42,10 @@ export const Navbar = () => {
                         <MdOutlineBusinessCenter size={30} />  ስራ
                     </Link>
 
-                    <Link to="/" className='cool-link'>Home</Link>
-                    <Link to="/jobs" className='cool-link'>Jobs</Link>
-                    <Link to='/contact' className='cool-link'>Contact</Link>
-                    <Link to='/about' className='cool-link'>About</Link>
+                    <Link onClick={() => setToggle(!toggle)} to="/" className='cool-link activeClassName="active" '>Home</Link>
+                    <Link onClick={() => setToggle(!toggle)} to="/jobs" className='cool-link activeClassName="active"'>Jobs</Link>
+                    <Link onClick={() => setToggle(!toggle)} to='/contact' className='cool-link activeClassName="active"'>Contact</Link>
+                    <Link onClick={() => setToggle(!toggle)} to='/about' className='cool-link activeClassName="active"'>About</Link>
 
                     {isLogin ? (
                         <Menu shadow="md" width={200}>
