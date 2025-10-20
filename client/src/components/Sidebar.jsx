@@ -31,30 +31,30 @@ export const Sidebar = ({sideTog}) => {
                     {/* <p className='underline underline-offset-8'>Dashboard</p> */}
                 </div>
 
-                <div className='flex justify-center  md:pl-12 pl-3 flex-col gap-14 items-start pt-20'>
+                <div className='flex justify-center  md:pl-12 pl-3 flex-col gap-6 items-start pt-20'>
 
                     <div className='flex justify-center gap-2 items-center'>
-                        <Link  to="/admin/dashboard" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'> <MdOutlineDashboard size={20} />Dashboard</Link>
+                        <Link  to="/admin/dashboard" className='flex blueCol rounded-md px-4 py-1 justify-center gap-2 items-center'> <MdOutlineDashboard size={20} />Dashboard</Link>
                     </div>
 
                     <div className='flex justify-center gap-2 items-center'>
-                        <Link  to="/admin/postJob" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'> <MdOutlineCreateNewFolder size={20} /> Post Job</Link>
+                        <Link  to="/admin/postJob" className='flex blueCol rounded-md px-4 py-1 justify-center gap-2 items-center'> <MdOutlineCreateNewFolder size={20} /> Post Job</Link>
                     </div>
 
                     <div className='flex justify-center gap-2 items-center'>
-                        <Link  to="/admin/allJobs" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
+                        <Link  to="/admin/allJobs" className='flex blueCol rounded-md px-4 py-1 justify-center gap-2 items-center'>
                             <BsBriefcase size={20} />View All Jobs
                         </Link>
                     </div>
 
                     <div className='flex justify-center gap-2 items-center'>
-                        <Link to="/admin/allUsers" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
+                        <Link to="/admin/allUsers" className='flex blueCol rounded-md px-4 py-1 justify-center gap-2 items-center'>
                             <AiOutlineUser size={20} />View All Users
                         </Link>
                     </div>
 
                     <div className='flex justify-center gap-2 items-center'>
-                        <Link to="/admin/allCompanies" className='flex blueCol px-4 py-1 justify-center gap-2 items-center'>
+                        <Link to="/admin/allCompanies" className='flex blueCol rounded-md px-4 py-1 justify-center gap-2 items-center'>
                             <MdBusiness size={20} />View All Companies
                         </Link>
                     </div>
