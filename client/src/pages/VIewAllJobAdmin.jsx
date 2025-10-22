@@ -64,9 +64,9 @@ export const ViewAllJobAdmin = () => {
               <div className="relative pb-24 overflow-x-auto shadow-md ">
 
 
-                <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
+                <table className="w-full rounded-md text-sm text-left text-gray-500 dark:text-gray-400">
 
-                  <thead className="text-xs text-gray-200 uppercase blueCol dark:text-gray-200">
+                  <thead className="text-xs text-gray-200 uppercase blueCol rounded-md dark:text-gray-200">
                     <tr>
                       <th scope="col" className="px-6 py-3">
                         Job Id

@@ -122,10 +122,16 @@ font-family: 'Ubuntu', sans-serif; */
     transition: width .3s;
 }
 
+.cool-link.active::after {
+  width: 100%;
+    transition: width .3s;
+}
+
 .cool-link:hover::after {
     width: 100%;
     transition: width .3s;
 }
+
 
 
 
