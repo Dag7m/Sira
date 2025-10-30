@@ -53,7 +53,7 @@
 
 
 .bold-placeholder::placeholder {
-    font-weight:500; /* Make the placeholder text bold */
+    font-weight:500; 
     color: gray; 
   }
 
