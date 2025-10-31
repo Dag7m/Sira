@@ -92,17 +92,17 @@ export const CreateJob = () => {
         <Sidebar sideTog={sideTog} />
 
 
-        <div className=' flex justify-center w-full items-start pt-6'>
+        <div className=' flex rounded-xl justify-center w-full items-start pt-6'>
 
 
           <form onSubmit={postHandler} className=' md:flex hidden  shadow-gray-700  w-full md:mx-0 mx-8' action="">
-            <div className='flex flex-col w-full justify-start items-start pt-4 gap-3'>
-              <div className='text-4xl pb-1 font-medium border-b border-gray-500 w-full'>
+            <div className='flex flex-col w-full justify-center items-center pt-4 gap-6'>
+              <div className='text-4xl text-center pb-1 font-medium border-b border-gray-500 w-full'>
                 Post Job
               </div>
               <div className='flex gap-3 pt-3'>
                 {/* Job Title */}
-                <div className='bg-white flex justify-center items-center'>
+                <div className='bg-white flex rounded-xl justify-center items-center'>
                   <div className='text-gray-600 px-2'>
                     <MdOutlineWorkOutline size={20} />
                   </div>
@@ -112,7 +112,7 @@ export const CreateJob = () => {
                 </div>
 
 {/* Company Name Dropdown */}
-<div className='bg-white flex justify-center items-center'>
+<div className='bg-white flex rounded-xl justify-center items-center'>
   <div className='text-gray-600 px-2'>
     <BiBuilding size={20} />
   </div>
@@ -136,7 +136,7 @@ export const CreateJob = () => {
 
                 {/* Company Logo */}
                 <div>
-                  <div className='bg-white flex w-[15.2rem] justify-center items-center'>
+                  <div className='bg-white flex rounded-xl w-[15.2rem] justify-center items-center'>
                     <div className='text-gray-600 px-2'>
                       {
                         logo.length !== 0 ?
@@ -160,7 +160,7 @@ export const CreateJob = () => {
               </div>
               <div className='flex gap-3'>
                 {/* Location */}
-                <div className='bg-white flex justify-center items-center'>
+                <div className='bg-white flex rounded-xl justify-center items-center'>
                   <div className='text-gray-600 px-2'>
                     <MdOutlineLocationOn size={20} />
                   </div>
@@ -169,7 +169,7 @@ export const CreateJob = () => {
                     required placeholder='Location' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
                 </div>
                  {/* Skills Required */}
-                <div className='bg-white w-full flex justify-center items-center'>
+                <div className='bg-white w-full rounded-xl flex justify-center items-center'>
                   <div className='text-gray-600 md:pb-12 pb-8 px-2'>
                     <MdWorkspacesOutline size={20} />
                   </div>
@@ -181,13 +181,13 @@ export const CreateJob = () => {
               </div>
               <div className='flex gap-3'>
                 {/* Experience */}
-                <div className='bg-white flex justify-center items-center'>
+                <div className='bg-white rounded-xl flex justify-center items-center'>
                   <div className='text-gray-600 px-2'>
                     <MdOutlineReceiptLong size={20} />
                   </div>
                   <input
                     value={experience} onChange={(e) => setExperience(e.target.value)}
-                    required placeholder='Experience' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
+                    required placeholder='Experience' type="text" className='outline-none rounded-xl bold-placeholder w-full text-black px-1 pr-3 py-2' />
                 </div>
 
 
@@ -195,20 +195,20 @@ export const CreateJob = () => {
 
 
                 {/* Salary */}
-                <div className='bg-white flex justify-center items-center'>
+                <div className='bg-white rounded-xl flex justify-center items-center'>
                   <div className='text-gray-600 px-2'>
                     <MdAttachMoney size={20} />
                   </div>
                   <input
                     value={salary} onChange={(e) => setSalary(e.target.value)}
-                    required placeholder='Salary' type="text" className='outline-none bold-placeholder w-full text-black px-1 pr-3 py-2' />
+                    required placeholder='Salary' type="text" className='outline-none rounded-xl bold-placeholder w-full text-black px-1 pr-3 py-2' />
                 </div>
 
               </div>
 
               <div className='flex w-[48rem] gap-3'>
                 {/* Job Description */}
-                <div className='bg-white w-full flex justify-center items-center'>
+                <div className='bg-white w-full rounded-xl flex justify-center items-center'>
                   <div className='text-gray-600 md:pb-12 pb-8 px-2'>
                     <MdOutlineFeaturedPlayList size={20} />
                   </div>
@@ -220,13 +220,13 @@ export const CreateJob = () => {
 
               </div>
 
-              <div className='flex gap-3 w-[48rem]'>
+              <div className='flex items-center justify-center gap-3 w-[48rem]'>
                
                 {/* Category */}
-                <div className='bg-white flex justify-center items-center'>
+                <div className='bg-white flex rounded-xl justify-center items-center'>
 
 
-                  <select required onChange={(e) => setCategory(e.target.value)} value={category} name="" id="large" className="block w-full px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
+                  <select required onChange={(e) => setCategory(e.target.value)} value={category} name="" id="large" className="block w-full rounded-xl px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
                     <option selected value="">Select Category</option>
                     <option value="1">Technology</option>
                     <option value="2">Marketing</option>
@@ -238,10 +238,10 @@ export const CreateJob = () => {
 
 
                 {/* Employment Type */}
-                <div className='bg-white flex justify-center items-center'>
+                <div className='bg-white flex rounded-xl justify-center items-center'>
 
 
-                  <select required onChange={(e) => setEmploymentType(e.target.value)} value={employmentType} name="" id="large" className="block w-full px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
+                  <select required onChange={(e) => setEmploymentType(e.target.value)} value={employmentType} name="" id="large" className="block w-full rounded-xl px-6 py-2 text-base text-gray-900 border border-gray-300  bg-gray-50 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 ">
                     <option selected value="">Select Employment Type</option>
                     <option value="full-time">Full-time</option>
                     <option value="part-time">Part-time</option>
@@ -258,7 +258,7 @@ export const CreateJob = () => {
               </div>
               <div className='flex w-full'>
 
-                <button className='blueCol w-[20rem] justify-center items-center flex px-4 py-2'>
+                <button className='blueCol w-[30rem] mt-6 mx-auto justify-center items-end rounded-lg text-center text-xl flex px-4 py-2'>
                   {loading ? <TbLoader2 className='animate-spin' size={24} /> : "Post Job"}
                 </button>
 

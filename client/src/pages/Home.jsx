@@ -88,8 +88,8 @@ export const Home = () => {
                 <div className='w-full flex pt-28 flex-col justify-start items-center gap-4'>
                     <div className='flex md:flex-row flex-col items-center justify-center md:gap-10 gap-1'>
                         <div className='md:text-8xl text-6xl titleT'>ስራ</div>
-                        <div className='flex justify-center items-center pt-1'>
-                            <logo to="/jobs" className='font-semibold md:text-2xl text-lg blueCol md:py-3 py-2 px-6 md:px-10'>Browse Jobs</logo>
+                        <div className='flex justify-center cursor-pointer items-center pt-1'>
+                            <logo to="/jobs" className='font-semibold md:text-2xl text-lg cursor-pointer blueCol md:py-3 py-2 px-6 md:px-10'>Browse Jobs</logo>
                         </div>
                     </div>
                     <div>
