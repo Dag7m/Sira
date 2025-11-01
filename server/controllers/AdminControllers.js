@@ -1,7 +1,7 @@
 
 const { initializeDatabase } = require('../config/database');
 
-let pool; // Pool will be initialized once
+let pool; 
 
 // Initialize the pool when the module is loaded
 (async () => {
