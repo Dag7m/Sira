@@ -3,7 +3,7 @@ const { initializeDatabase } = require('../config/database');
 
 let pool; 
 
-// Initialize the pool when the module is loaded
+
 (async () => {
   pool = await initializeDatabase();
 })();
