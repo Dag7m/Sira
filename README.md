@@ -30,8 +30,7 @@ SIRA is a full-stack job portal application where users can register, create/upd
 ## ⚙️ Technologies Used
 
 * Node.js + Express
-* MySQL (for authentication and user data)
-* MongoDB + Mongoose (for job listings and applications)
+* MySQL 
 * Cloudinary (for image and resume uploads)
 * JWT (for secure login authentication)
 * bcrypt (for password hashing)
