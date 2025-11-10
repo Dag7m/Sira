@@ -199,7 +199,6 @@ exports.addCompany = async (req, res) => {
   }
 };
 
-// Delete a company
 exports.deleteCompany = async (req, res) => {
   try {
     await pool.query(`DELETE FROM companies WHERE id = ?`, [req.params.id]);
